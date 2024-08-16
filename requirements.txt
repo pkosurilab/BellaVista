@@ -12,3 +12,4 @@ shapely==2.0.5
 pyarrow==17.0.0
 imagecodecs==2024.6.1
 dask==2024.7.1
+napari[all]==0.5.2
