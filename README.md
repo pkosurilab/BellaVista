@@ -4,7 +4,8 @@ and custom (home-built) MERFISH datasets utilizing [napari](https://napari.org/)
 We developed Bella Vista to help the spatial transcriptomics community explore their data and create reproducible paper-ready figures.
 
 ## Installation
-It is recommended to create an [Anaconda](https://www.anaconda.com/) virtual environment to prevent conflicting package dependencies. \
+The following instructions require that you have [Anaconda](https://www.anaconda.com/) installed.\
+It is recommended to create an Anaconda virtual environment to prevent conflicting package dependencies. \
 Bella Vista requires python 3.9
 
 Create and activate a new virtual environment:
@@ -31,21 +32,23 @@ Load Bella Vista with sample data:
 cd bellavista
 python bellavista.py ../sample_json/xenium_brain_rep3.json
 ```
+**Note**: It will take a few minutes to create the required data files.\
+The terminal will print updates & have progress bars for time consuming steps.
 
-Once successfully loaded, you should see the message `Data Loaded!` in the terminal\
-A napari window should appear displaying the data similar to the image below
+Once successfully loaded, you should see the message `Data Loaded!` in the terminal.\
+A napari window should appear displaying the data similar to the image below.
 
 <p align="center">
   <img src="./test/xenium_position0.png" width="800" />
 </p>
 
 Now, you can interactively move around the napari canvas to explore the data!\
-Try zooming in & out, toggling layers on & off to see different spatial patterns
+Try zooming in & out, toggling layers on & off to see different spatial patterns!
 
 
 <img src="./test/xenium_position2_ALL.png" width="500" /> <img src="./test/xenium_position2_select.png" width="500" />
 
-To visualize your own data, you will need to create a input JSON file as explained below\
+To visualize your own data, you will need to create a input JSON file as explained below.\
 With your JSON file, you can load your data with the command:
 
 ```
