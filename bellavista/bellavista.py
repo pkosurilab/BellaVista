@@ -1,3 +1,6 @@
+#Author: Annabelle Coles
+import input_data
+import argparse
 from json import load
 import sys
 import os
@@ -6,7 +9,6 @@ import numpy as np
 import napari
 import random
 import matplotlib.pyplot as plt
-import input_data
 from napari.utils.colormaps import Colormap
 from napari.utils.colormaps import AVAILABLE_COLORMAPS
 from matplotlib import colors as mpl_colors
@@ -109,8 +111,19 @@ def bellavista(
 
 def main():
 
+    # Check if input JSON file was provided
+    parser = argparse.ArgumentParser(description="Process input file for Bellavista.")
+    parser.add_argument('input_file', type=str, nargs='?', help="Path to the input JSON file")
+    parser.add_argument('-i', '--input_file', type=str)
+    args = parser.parse_args()
+    input_file = args.input_file or args.input_file
+    if not input_file:
+        print("Error: No input JSON file provided. You must provide an input file either as the first argument or with the -i/--input_file option.")
+        parser.print_help()
+        sys.exit(1)
+
     # load dataset-specific JSON (first argument)
-    with open(sys.argv[1], 'r') as f:
+    with open(input_file, 'r') as f:
         json_file = load(f)
         json_file_param = json_file.get("parameters")
         create_bellavista_inputs = json_file.get("create_bellavista_inputs", False)
