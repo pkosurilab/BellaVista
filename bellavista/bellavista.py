@@ -112,10 +112,10 @@ def main():
 
     # Check if input JSON file was provided
     parser = argparse.ArgumentParser(description="Process input file for Bellavista.")
-    parser.add_argument('input_file', type=str, nargs='?', help="Path to the input JSON file")
+    parser.add_argument('positional_input_file', type=str, nargs='?', help="Path to the input JSON file")
     parser.add_argument('-i', '--input_file', type=str)
     args = parser.parse_args()
-    input_file = args.input_file or args.input_file
+    input_file = args.input_file if args.input_file else args.positional_input_file
     if not input_file:
         print("Error: No input JSON file provided. You must provide an input file either as the first argument or with the -i/--input_file option.")
         parser.print_help()
