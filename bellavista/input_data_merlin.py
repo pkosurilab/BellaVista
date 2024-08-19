@@ -73,9 +73,8 @@ def create_transcripts(data_folder: str, bellavista_output_folder: str, json_fil
         return exceptions
     try:
         print('Creating transcripts')
-
-        transcript_filename = json_file_input_files.get("codebook")
-        codebook = json_file_input_files.get("transcript_filename")
+        transcript_filename = json_file_input_files.get("transcript_filename")
+        codebook = json_file_input_files.get("codebook")
         txs_locations_df = pd.read_csv(os.path.join(data_folder, transcript_filename), delimiter=',')
         #map codebook to barcode ids 
         codebook_df = pd.read_csv(os.path.join(data_folder, codebook), delimiter=',')
@@ -107,7 +106,7 @@ def process_segmentations(data_folder: str, bellavista_output_folder: str, segme
         Args:
             data_folder: Path to folder containing dataset files.
             bellavista_output_folder: Path to output data folder to store input files for bellavista.py
-            segmentation_file: Path to folder containing HDF5 files.
+            segmentation_folder: Path to folder containing HDF5 files.
             seg_type: "cell" or "nuclear" depending on type of segmentation. 
             z_plane: Integer index to extract segmentations from.
 
@@ -173,13 +172,13 @@ def create_segmentations(data_folder: str, bellavista_output_folder: str, json_f
     nuclear_segmentation_folder = json_file_input_files.get("nuclear_segmentation")
     z_plane = json_file_input_files.get("z_plane", 0)
 
-    if not process_segmentations(data_folder, bellavista_output_folder, segmentation_file=cell_segmentation_folder,
+    if not process_segmentations(data_folder, bellavista_output_folder, segmentation_folder=cell_segmentation_folder,
                             seg_type="cell", z_plane=z_plane):
         # update exceptions dictionary to document an error
         if not os.path.exists(os.path.join(bellavista_output_folder, f"cell_boundary_coords.pkl")):
             exceptions[f'valid_cell_seg'] = False
 
-    if not process_segmentations(data_folder, bellavista_output_folder, segmentation_file=nuclear_segmentation_folder,
+    if not process_segmentations(data_folder, bellavista_output_folder, segmentation_folder=nuclear_segmentation_folder,
                               seg_type="nuclear", z_plane=z_plane):
         # update exceptions dictionary to document an error
         if not os.path.exists(os.path.join(bellavista_output_folder, f"nuclear_boundary_coords.pkl")):
