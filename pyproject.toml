@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bellavista"
+version = "0.0.1"
+authors = [
+    {name = "Annabelle Coles", email = "acoles@salk.edu"},
+    {name = "Pallav Kosuri"}]   
+description="Python package for interactive visualization of imaging-based spatial transcriptomics."
+keywords = ["spaital transcriptomics", "visualization", "napari", "python"]
+license = {file = "LICENSE.txt"}
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha"]
+dependencies = [
+    "tqdm",
+    "numpy",
+    "pandas",
+    "h5py",
+    "matplotlib",
+    "ome-zarr",
+    "napari-ome-zarr",
+    "zarr",
+    "imagecodecs",
+    "shapely",
+    "pyarrow",
+    "ngff-writer @ git+https://github.com/pkosurilab/ngff-writer@main",
+    "dask>=2022.02.0",
+    "napari[all]"]
+
+[project.urls]
+Documentation = "https://bellavista.readthedocs.io"
+Repository = "https://github.com/pkosurilab/BellaVista.git"
+Issues = "https://github.com/pkosurilab/BellaVista/issues"
+
+[tool.setuptools]
+packages = ["bellavista"]
+
+[project.scripts]
+bellavista = "bellavista.bellavista:main"
