@@ -1,0 +1,12 @@
+{
+    "_collections": [
+        {
+            "images": {
+                "w1/ion_images": {},
+                "w1/post_maldi": {},
+                "w1/pre_maldi": {}
+            },
+            "name": "well1"
+        }
+    ]
+}
