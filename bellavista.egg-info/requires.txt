@@ -1,0 +1,13 @@
+tqdm
+numpy
+pandas
+h5py
+matplotlib
+ome-zarr
+napari-ome-zarr
+zarr
+imagecodecs
+shapely
+pyarrow
+dask>=2022.02.0
+napari[all]

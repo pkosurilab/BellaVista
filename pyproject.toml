@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "bellavista"
-version = "0.0.1"
+version = "0.0.95"
 authors = [
     {name = "Annabelle Coles", email = "acoles@salk.edu"},
     {name = "Pallav Kosuri"}]   
@@ -27,7 +27,6 @@ dependencies = [
     "imagecodecs",
     "shapely",
     "pyarrow",
-    "ngff-writer @ git+https://github.com/pkosurilab/ngff-writer@main",
     "dask>=2022.02.0",
     "napari[all]"]
 
