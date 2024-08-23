@@ -6,8 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "bellavista"
 version = "0.0.95"
 authors = [
-    {name = "Annabelle Coles", email = "acoles@salk.edu"},
-    {name = "Pallav Kosuri"}]   
+    {name = "Annabelle Coles", email = "acoles@salk.edu"}]   
 description="Python package for interactive visualization of imaging-based spatial transcriptomics."
 keywords = ["spaital transcriptomics", "visualization", "napari", "python"]
 license = {file = "LICENSE.txt"}
