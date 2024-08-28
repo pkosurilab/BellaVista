@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "bellavista"
-version = "0.0.95"
+version = "0.0.1"
 authors = [
     {name = "Annabelle Coles", email = "acoles@salk.edu"}]   
 description="Python package for interactive visualization of imaging-based spatial transcriptomics."

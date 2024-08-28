@@ -25,7 +25,8 @@ def bellavista(
         plot_cell_seg=False,
         plot_nuclear_seg=False,
         transcript_point_size=None,
-        contrast_limits=None
+        contrast_limits=None,
+        rotate_angle=None
 ):
 
     print("Loading Bella Vista:")
@@ -95,7 +96,7 @@ def bellavista(
         AVAILABLE_COLORMAPS['cell_cmap'] = custom_cmap
 
         coords = pickle.load(open(os.path.join(bella_vista_output_folder,"cell_boundary_coords.pkl"),"rb"))
-        viewer.add_tracks(coords, name='cell boundaries', colormap='cell_cmap', visible=True, blending = 'opaque')
+        viewer.add_tracks(coords, name='cell boundaries', colormap='cell_cmap', visible=False, blending = 'opaque')
 
     if(plot_nuclear_seg):
         print("Loading nuclear segmentation...")
@@ -105,8 +106,14 @@ def bellavista(
         AVAILABLE_COLORMAPS['nuclear_cmap'] = custom_cmap
 
         coords = pickle.load(open(os.path.join(bella_vista_output_folder,"nuclear_boundary_coords.pkl"),"rb"))
-        viewer.add_tracks(coords, name='nuclear boundaries', colormap='nuclear_cmap', visible=True, blending = 'opaque')
+        viewer.add_tracks(coords, name='nuclear boundaries', colormap='nuclear_cmap', visible=False, blending = 'opaque')
     
+    if rotate_angle is not None:
+        print(f"Rotating data by {rotate_angle} degrees")
+        for layer in viewer.layers:
+            layer.rotate = rotate_angle
+        viewer.reset_view()
+
     print("Data loaded!")
     viewer.scale_bar.visible = True
     viewer.scale_bar.unit = 'um'
@@ -144,7 +151,8 @@ def main():
         plot_cell_seg=json_file_param.get("plot_cell_seg"),
         plot_nuclear_seg=json_file_param.get("plot_nuclear_seg"),
         transcript_point_size=json_file_param.get("transcript_point_size"),
-        contrast_limits=json_file_param.get("contrast_limits")
+        contrast_limits=json_file_param.get("contrast_limits"),
+        rotate_angle=json_file_param.get("rotate_angle")
     )
 
 if __name__ == '__main__':
