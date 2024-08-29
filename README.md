@@ -2,8 +2,7 @@
   <img alt="Bella Vista logo" src="https://github.com/pkosurilab/BellaVista/blob/pypi-documentation/images/bellavista_logo_graphic.png?raw=true" width="150">
 </p>
 
-<h1 style="margin-top: -1em; border-bottom: 0">Bella Vista</h1>
-<h2  style="margin-top: -0.5em">Open-Source Visualization for Imaging-Based Spatial Transcriptomics </h2>
+# Bella Vista: Open-Source Visualization for Imaging-Based Spatial Transcriptomics
 
 Bella Vista is an open-source Python package developed for 10x Genomics Xenium, Vizgen MERSCOPE, 
 and custom (home-built) MERFISH datasets utilizing [napari](https://napari.org/) for interactive data exploration. 
