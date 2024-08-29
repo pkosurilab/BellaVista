@@ -75,15 +75,15 @@ The terminal will print updates & have progress bars for time consuming steps.
 Once successfully loaded, you should see the message `Data Loaded!` in the terminal.\
 A napari window should appear displaying the data similar to the image below:
 
-<img src="https://github.com/pkosurilab/BellaVista/blob/pypi-documentation/images/xenium_position0_compressed.png?raw=true" alt="Initial napari load page" width="500" />
+<img src="https://github.com/pkosurilab/BellaVista/blob/pypi-documentation/images/xenium_brain_position0_allgenes.png?raw=true" alt="Initial napari load page" width="500" />
 <br/><br/>
 
 Now, you can interactively move around the napari canvas to explore the data!\
 Try zooming in & out, toggling layers on & off to see different spatial patterns:
 
-<img src="https://github.com/pkosurilab/BellaVista/blob/pypi-documentation/images/xenium_position2_ALL_compressed.png?raw=true" alt="Zoom out of napari" width="500" /> 
+<img src="https://github.com/pkosurilab/BellaVista/blob/pypi-documentation/images/xenium_brain_position0_selectgenes.png?raw=true" alt="Zoom out of napari" width="500" /> 
 <br/><br/>
-<img src="https://github.com/pkosurilab/BellaVista/blob/pypi-documentation/images/xenium_position2_select_compressed.png?raw=true" alt="Zoom out of napari with selected genes visible" width="500" />
+<img src="https://github.com/pkosurilab/BellaVista/blob/pypi-documentation/images/xenium_brain_position1.png?raw=true" alt="Zoom out of napari with selected genes visible" width="500" />
 
 The example JSON file can also be found on the Bella Vista GitHub repository: https://github.com/pkosurilab/BellaVista/tree/main/sample_json/xenium_brain_rep3.json
 
