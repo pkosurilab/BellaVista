@@ -62,7 +62,7 @@ Download sample data: [Xenium mouse brain dataset (replicate 3)](https://www.10x
         "plot_cell_seg": false,
         "plot_nuclear_seg": false,
         "transcript_point_size": 0.75,
-        "contrast_limits": [610, 3231],
+        "contrast_limits": [600, 3200],
         "rotate_angle": 180
     },
 
