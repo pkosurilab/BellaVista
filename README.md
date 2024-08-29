@@ -53,12 +53,13 @@ Download sample data: [Xenium mouse brain dataset (replicate 3)](https://www.10x
         "plot_cell_seg": false,
         "plot_nuclear_seg": false,
         "transcript_point_size": 0.75,
-        "contrast_limits": [800,6000]
+        "contrast_limits": [610, 3231],
+        "rotate_angle": 180
     },
 
     "input_files": {
         "images": "morphology_mip.ome.tif",
-        "z_plane": 0,
+        "z_plane": 5,
         "transcript_filename": "transcripts.parquet",
         "cell_segmentation": "cell_boundaries.parquet",
         "nuclear_segmentation": "nucleus_boundaries.parquet"
