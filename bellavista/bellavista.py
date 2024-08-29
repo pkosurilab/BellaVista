@@ -79,7 +79,18 @@ def bellavista(
         if not plot_allgenes and selected_genes is not None and len(selected_genes) > 0:
             for gene in tqdm(selected_genes, desc = 'Loading gene transcripts...', total = len(selected_genes)):
                 color = random.choice(txs_colors)
-                viewer.add_points(gene_dict[gene], size=transcript_point_size, border_width=0, name=gene, face_color=color, border_color=color, visible=True) #create napari point layer for each selected gene 
+                try:
+                    viewer.add_points(gene_dict[gene], size=transcript_point_size, border_width=0, name=gene, face_color=color, border_color=color, visible=True) #create napari point layer for each selected gene 
+                except KeyError:
+                    try:
+                        lowercase_geneID = gene.lower()
+                        geneID = next((key for key in gene_dict if key.lower() == lowercase_geneID), None)
+                        txs_points = gene_dict.get(geneID)
+                        viewer.add_points(txs_points, size=transcript_point_size, border_width=0, name=geneID, face_color=color, border_color=color, visible=True) #create napari point layer for each selected gene 
+                        if geneID is None:
+                            raise KeyError(f'{gene} not found in dataset. Please check the spelling. Skipping {gene}')
+                    except KeyError as e:
+                        print(e)
         # load all genes
         else:
             for gene in tqdm(sorted_gene_names, desc = 'Loading gene transcripts...', total = len(sorted_gene_names)):
