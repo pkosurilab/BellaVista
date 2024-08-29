@@ -135,7 +135,7 @@ def main():
     # load dataset-specific JSON (first argument)
     with open(input_file, 'r') as f:
         json_file = load(f)
-        json_file_param = json_file.get("parameters")
+        json_file_param = json_file.get("visualization_parameters")
         create_bellavista_inputs = json_file.get("create_bellavista_inputs", False)
     
     if(create_bellavista_inputs == True):
