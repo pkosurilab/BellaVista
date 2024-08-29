@@ -136,7 +136,7 @@ def main():
     with open(input_file, 'r') as f:
         json_file = load(f)
         json_file_param = json_file.get("visualization_parameters")
-        create_bellavista_inputs = json_file.get("create_bellavista_inputs", False)
+        create_bellavista_inputs = json_file.get("create_bellavista_inputs", True)
     
     if(create_bellavista_inputs == True):
         input_data.create_inputs(json_file)
