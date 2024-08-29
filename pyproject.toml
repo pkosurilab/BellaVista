@@ -27,7 +27,9 @@ dependencies = [
     "shapely",
     "pyarrow",
     "dask>=2022.02.0",
-    "napari[all]"]
+    "napari[all]",
+    "scikit-image",
+    "dask_image"]
 
 [project.urls]
 Documentation = "https://bellavista.readthedocs.io"
