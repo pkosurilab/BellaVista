@@ -8,6 +8,15 @@ Bella Vista is an open-source Python package developed for 10x Genomics Xenium, 
 and custom (home-built) MERFISH datasets utilizing [napari](https://napari.org/) for interactive data exploration. 
 We developed Bella Vista to help the spatial transcriptomics community explore their data and create reproducible paper-ready figures. See the [Bella Vista GitHub](https://github.com/pkosurilab/BellaVista) for documentation and usage instructions. 
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset=https://github.com/pkosurilab/BellaVista/blob/pypi-documentation/images/bellavista_figure_darkmode.png?raw=true width="900">
+    <img alt="Bella Vista workflow" src="https://github.com/pkosurilab/BellaVista/blob/pypi-documentation/images/bellavista_figure.png?raw=true" width="900">
+  </picture>
+</p>
+<p align="center">
+
+
 ## Installation
 The following instructions require that you have [Anaconda](https://www.anaconda.com/) installed.
 - It is recommended to create an Anaconda virtual environment to prevent conflicting package dependencies. 
@@ -76,15 +85,15 @@ The terminal will print updates & have progress bars for time consuming steps.
 Once successfully loaded, you should see the message `Data Loaded!` in the terminal.\
 A napari window should appear displaying the data similar to the image below:
 
-<img src="https://github.com/pkosurilab/BellaVista/blob/pypi-documentation/images/xenium_brain_position0_allgenes.png?raw=true" alt="Initial napari load page" width="500" />
+<img src="https://github.com/pkosurilab/BellaVista/blob/pypi-documentation/images/xenium_brain_position0_allgenes.png?raw=true" alt="Initial napari load page" width="600" />
 <br/><br/>
 
 Now, you can interactively move around the napari canvas to explore the data!\
 Try zooming in & out, toggling layers on & off to see different spatial patterns:
 
-<img src="https://github.com/pkosurilab/BellaVista/blob/pypi-documentation/images/xenium_brain_position0_selectgenes.png?raw=true" alt="Zoom out of napari" width="500" /> 
+<img src="https://github.com/pkosurilab/BellaVista/blob/pypi-documentation/images/xenium_brain_position0_selectgenes.png?raw=true" alt="Zoom out of napari" width="600" /> 
 <br/><br/>
-<img src="https://github.com/pkosurilab/BellaVista/blob/pypi-documentation/images/xenium_brain_position1.png?raw=true" alt="Zoom out of napari with selected genes visible" width="500" />
+<img src="https://github.com/pkosurilab/BellaVista/blob/pypi-documentation/images/xenium_brain_position1.png?raw=true" alt="Zoom out of napari with selected genes visible" width="600" />
 
 The example JSON file can also be found on the Bella Vista GitHub repository: https://github.com/pkosurilab/BellaVista/tree/main/sample_json/xenium_brain_rep3.json
 
