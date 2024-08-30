@@ -6,8 +6,13 @@
 
 Bella Vista is an open-source Python package developed for 10x Genomics Xenium, Vizgen MERSCOPE, 
 and custom (home-built) MERFISH datasets utilizing [napari](https://napari.org/) for interactive data exploration. 
-We developed Bella Vista to help the spatial transcriptomics community explore their data and create reproducible paper-ready figures. See the [Bella Vista GitHub](https://github.com/pkosurilab/BellaVista) for documentation and usage instructions. 
+We developed Bella Vista to help the spatial transcriptomics community explore their data and create reproducible paper-ready figures. See our [work-in-progress documentation website](https://baby-stringbean.readthedocs.io/) for further documentation and usage instructions. 
 
+```{eval-rst}
+.. note::
+
+   This project is currently under active development.
+```
 
 
 <p align="center">
@@ -41,10 +46,9 @@ pip install bellavista
 
 ```
 git clone https://github.com/pkosurilab/BellaVista
-```
-```
 pip install -e BellaVista
 ```
+
 ---
 ## Getting Started (with sample data)
 Download sample data: [Xenium mouse brain dataset (replicate 3)](https://www.10xgenomics.com/datasets/fresh-frozen-mouse-brain-replicates-1-standard)
