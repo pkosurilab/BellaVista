@@ -128,6 +128,7 @@ def bellavista(
     print("Data loaded!")
     viewer.scale_bar.visible = True
     viewer.scale_bar.unit = 'um'
+    viewer.camera.zoom = 0.6
     napari.run()
 
 def main():
