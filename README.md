@@ -8,6 +8,8 @@ Bella Vista is an open-source Python package developed for 10x Genomics Xenium, 
 and custom (home-built) MERFISH datasets utilizing [napari](https://napari.org/) for interactive data exploration. 
 We developed Bella Vista to help the spatial transcriptomics community explore their data and create reproducible paper-ready figures. See the [Bella Vista GitHub](https://github.com/pkosurilab/BellaVista) for documentation and usage instructions. 
 
+
+
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset=https://github.com/pkosurilab/BellaVista/blob/pypi-documentation/images/bellavista_figure_darkmode.png?raw=true width="900">
@@ -20,8 +22,9 @@ We developed Bella Vista to help the spatial transcriptomics community explore t
 ## Installation
 The following instructions require that you have [Anaconda](https://www.anaconda.com/) installed.
 - It is recommended to create an Anaconda virtual environment to prevent conflicting package dependencies. 
+<!-- - The package can be installed from PyPI via [pip](https://pypi.org/project/pip/) (recommended) or from the [GitHub repository](https://github.com/pkosurilab/BellaVista). -->
 - The package can be installed from PyPI via [pip](https://pypi.org/project/pip/) (recommended) or from the [GitHub repository](https://github.com/pkosurilab/BellaVista).
-- Bella Vista requires python 3.8 or above.
+- Bella Vista requires python 3.9 or above.
 
 Create and activate a new virtual environment:
 
@@ -30,11 +33,11 @@ conda create -n bellavista_env python=3.9
 conda activate bellavista_env
 ```
 
-### Installation via pip:
+<!-- ### Installation via pip:
 ```
 pip install bellavista
 ```
----
+--- -->
 ### Installation from GitHub repository:
 
 ```
@@ -48,6 +51,7 @@ pip install -e BellaVista
 Download sample data: [Xenium mouse brain dataset (replicate 3)](https://www.10xgenomics.com/datasets/fresh-frozen-mouse-brain-replicates-1-standard)
 - Copy and save contents below into a new JSON file called `xenium_example.json`
 - Replace the paths in the `data_folder` and `bella_vista_output_folder` properties
+
 ```
 { 
     "system": "xenium", 
@@ -62,7 +66,7 @@ Download sample data: [Xenium mouse brain dataset (replicate 3)](https://www.10x
         "plot_cell_seg": false,
         "plot_nuclear_seg": false,
         "transcript_point_size": 0.75,
-        "contrast_limits": [600, 3200],
+        "contrast_limits": [0, 5000],
         "rotate_angle": 180
     },
 
@@ -95,6 +99,6 @@ Try zooming in & out, toggling layers on & off to see different spatial patterns
 <br/><br/>
 <img src="https://github.com/pkosurilab/BellaVista/blob/pypi-documentation/images/xenium_brain_position1.png?raw=true" alt="Zoom out of napari with selected genes visible" width="600" />
 
-The example JSON file can also be found on the Bella Vista GitHub repository: https://github.com/pkosurilab/BellaVista/tree/main/sample_json/xenium_brain_rep3.json
+The example JSON file can also be found on the Bella Vista GitHub repository: https://github.com/pkosurilab/BellaVista/tree/main/sample_json/xenium_example.json
 
-## To run Bella Vista with your own data, see the [Bella Vista GitHub](https://github.com/pkosurilab/BellaVista) for documentation and usage instructions
+<!-- ## To run Bella Vista with your own data, see the [Bella Vista GitHub](https://github.com/pkosurilab/BellaVista) for documentation and usage instructions -->
