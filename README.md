@@ -31,7 +31,6 @@ Create and activate a new virtual environment:
 ```
 conda create -n bellavista_env python=3.9
 conda activate bellavista_env
-conda install git
 ```
 
 <!-- ### Installation via pip:
@@ -42,6 +41,7 @@ pip install bellavista
 ### Installation from GitHub repository:
 
 ```
+conda install git
 git clone https://github.com/pkosurilab/BellaVista
 pip install -e BellaVista
 ```
