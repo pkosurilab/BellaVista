@@ -23,7 +23,6 @@ We developed Bella Vista to help the spatial transcriptomics community explore t
 The following instructions require that you have [Anaconda](https://www.anaconda.com/) installed.
 - It is recommended to create an Anaconda virtual environment to prevent conflicting package dependencies. 
 <!-- - The package can be installed from PyPI via [pip](https://pypi.org/project/pip/) (recommended) or from the [GitHub repository](https://github.com/pkosurilab/BellaVista). -->
-- The package can be installed from PyPI via [pip](https://pypi.org/project/pip/) (recommended) or from the [GitHub repository](https://github.com/pkosurilab/BellaVista).
 - Bella Vista requires python 3.9 or above.
 
 Create and activate a new virtual environment:
