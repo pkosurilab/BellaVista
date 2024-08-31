@@ -13,8 +13,8 @@ We developed Bella Vista to help the spatial transcriptomics community explore t
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset=https://github.com/pkosurilab/BellaVista/blob/pypi-documentation/images/bellavista_figure_darkmode.png?raw=true width="900">
-    <img alt="Bella Vista workflow" src="https://github.com/pkosurilab/BellaVista/blob/pypi-documentation/images/bellavista_figure.png?raw=true" width="900">
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/pkosurilab/BellaVista/blob/main/images/bellavista_figure_darkmode.png?raw=true" width="900">
+    <img alt="Bella Vista workflow" src="https://github.com/pkosurilab/BellaVista/blob/main/images/bellavista_figure.png?raw=true" width="900">
   </picture>
 </p>
 <p align="center">
@@ -48,9 +48,15 @@ pip install -e BellaVista
 
 ---
 ## Getting Started (with sample data)
-Download sample data: [Xenium mouse brain dataset (replicate 3)](https://www.10xgenomics.com/datasets/fresh-frozen-mouse-brain-replicates-1-standard)
+Download sample data: [Xenium mouse brain dataset (Replicate 3)](https://www.10xgenomics.com/datasets/fresh-frozen-mouse-brain-replicates-1-standard)
+
+<img src="https://github.com/pkosurilab/BellaVista/blob/main/images/xenium_testdata_location.png?raw=true" alt="Xenium sample data website location" width="600" />
+https://www.10xgenomics.com/datasets/fresh-frozen-mouse-brain-replicates-1-standard
+<br/><br/>
+
 - Copy and save contents below into a new JSON file called `xenium_example.json`
 - Replace the paths in the `data_folder` and `bella_vista_output_folder` properties
+- **Note**: JSON files cannot interpret the blackslash character (\\) instead you should use a forward slash (/)
 
 ```
 { 
@@ -89,7 +95,7 @@ The terminal will print updates & have progress bars for time consuming steps.
 Once successfully loaded, you should see the message `Data Loaded!` in the terminal.\
 A napari window should appear displaying the data similar to the image below:
 
-<img src="https://github.com/pkosurilab/BellaVista/blob/pypi-documentation/images/xenium_brain_position0_allgenes.png?raw=true" alt="Initial napari load page" width="600" />
+<img src="https://github.com/pkosurilab/BellaVista/blob/main/images/xenium_brain_position0_allgenes.png?raw=true" alt="Initial napari load page" width="600" />
 <br/><br/>
 
 Now, you can interactively move around the napari canvas to explore the data!\
@@ -97,7 +103,7 @@ Try zooming in & out, toggling layers on & off to see different spatial patterns
 
 <img src="https://github.com/pkosurilab/BellaVista/blob/pypi-documentation/images/xenium_brain_position0_selectgenes.png?raw=true" alt="Zoom out of napari" width="600" /> 
 <br/><br/>
-<img src="https://github.com/pkosurilab/BellaVista/blob/pypi-documentation/images/xenium_brain_position1.png?raw=true" alt="Zoom out of napari with selected genes visible" width="600" />
+<img src="https://github.com/pkosurilab/BellaVista/blob/main/images/xenium_brain_position1.png?raw=true" alt="Zoom out of napari with selected genes visible" width="600" />
 
 The example JSON file can also be found on the Bella Vista GitHub repository: https://github.com/pkosurilab/BellaVista/tree/main/sample_json/xenium_example.json
 
