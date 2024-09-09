@@ -1,8 +1,4 @@
 #Author: Annabelle Coles
-from . import input_data_xenium
-from . import input_data_merscope
-from . import input_data_merlin
-
 from .utils.ngff_writer.array_utils import to_tczyx
 from .utils.ngff_writer.writer import open_ngff_zarr
 from dask_image.imread import imread
@@ -16,8 +12,11 @@ from datetime import datetime
 from typing import Dict, List
 import logging
 
-# Create a logger for this module
-logger = logging.getLogger(__name__)
+def setup_logger(bellavista_output_folder: str):
+    # Set a log file in the output folder
+    logging.basicConfig(filename=os.path.join(bellavista_output_folder, 'error_log.log'),  # Absolute path
+                        level=logging.ERROR,
+                        format='%(asctime)s - %(levelname)s - %(message)s')
 
 def create_inputs(json_file: Dict):
 
@@ -42,14 +41,21 @@ def create_inputs(json_file: Dict):
     if not os.path.exists(bellavista_output_folder):
         print(f'Directory {bellavista_output_folder} does not exist -- creating the directory!')
         os.makedirs(bellavista_output_folder)
+    
+    setup_logger(bellavista_output_folder)
 
+    # add local imports here so errors will be logged to error_log.log
+    from . import input_data_xenium
+    from . import input_data_merscope
+    from . import input_data_merlin
+    
     # create a dictionary to store any exceptions caused by invalid/missing input files
     exceptions = {}
 
     system = json_file.get("system")
 
     if (system.lower() == "xenium"):
-        print("Creating Bella Vista input files for 10x Genomics Xenium", end="\n\n")
+        print("Creating Bella Vista input files for 10x Genomics Xenium")
         exceptions = create_ome_zarr(data_folder, bellavista_output_folder, json_file_input_files, exceptions)
         exceptions = input_data_xenium.create_micron_pixel(data_folder, bellavista_output_folder, json_file_input_files, exceptions)
         exceptions = input_data_xenium.create_transcripts(data_folder, bellavista_output_folder, json_file_input_files, exceptions)
@@ -60,7 +66,7 @@ def create_inputs(json_file: Dict):
 
 
     elif (system.lower() == "merscope"):
-        print("Creating Bella Vista input files for Vizgen MERSCOPE", end="\n\n")
+        print("Creating Bella Vista input files for Vizgen MERSCOPE")
         exceptions = create_ome_zarr(data_folder, bellavista_output_folder, json_file_input_files, exceptions)
         exceptions = input_data_merscope.create_micron_pixel(data_folder, bellavista_output_folder, json_file_input_files, exceptions)
         exceptions = input_data_merscope.create_transcripts(data_folder, bellavista_output_folder, json_file_input_files, exceptions)
@@ -70,7 +76,7 @@ def create_inputs(json_file: Dict):
             json.dump(exceptions, f)
 
     else:
-        print("Creating Bella Vista input files for Custom MERFISH (MERlin)", end="\n\n")
+        print("Creating Bella Vista input files for Custom MERFISH (MERlin)")
         exceptions = create_ome_zarr(data_folder, bellavista_output_folder, json_file_input_files, exceptions)
         exceptions = input_data_merlin.create_micron_pixel(data_folder, bellavista_output_folder, json_file_input_files, exceptions)
         exceptions = input_data_merlin.create_transcripts(data_folder, bellavista_output_folder, json_file_input_files, exceptions)
@@ -96,23 +102,28 @@ def create_ome_zarr(data_folder: str, bellavista_output_folder: str, json_file_i
         Returns:
             exceptions: An updated version of exceptions dictionary parsed if an error occured.
     """
+    try:
+        # if images have been processed previously, exit early
+        ome_zarr_path = os.path.join(bellavista_output_folder, 'OMEzarrImages')
+        image_names_path = os.path.join(bellavista_output_folder, 'image_file_names.pkl')
 
-    # if images have been processed previously, exit
-    if os.path.exists(os.path.join(bellavista_output_folder, 'image_file_names.pkl')):
-        return exceptions
-    
-    print("Creating OME-zarr image", datetime.now())
-    images = json_file_input_files.get("images")
-    z_plane = json_file_input_files.get("z_plane", 0)
+        if os.path.exists(ome_zarr_path) and os.path.exists(image_names_path):
+            print("OME-Zarr images have been processed previously. Skipping reprocessing.")
+            return exceptions
 
-    if images is None: 
-        print("no images provided", end="\n\n")
-        exceptions['valid_image'] = False
-        return exceptions
-    # open GL max texture size
-    napari_size_limit = 16384
+        images = json_file_input_files.get("images")
+        z_plane = json_file_input_files.get("z_plane", 0)
 
-    dask.config.set({"array.slicing.split_large_chunks": False})
+        if images is None:
+            print("No input image files provided")
+            exceptions['valid_image'] = False
+            return exceptions
+        
+        print(f"Creating OME-Zarr image at {datetime.now()}")
+
+        # OpenGL max texture size - napari will downscale image if OME-Zarr tile exceeds this shape
+        napari_size_limit = 16384
+        dask.config.set({"array.slicing.split_large_chunks": False})
 
         def process_image(image_path: str, z_plane: int):
             """Helper function to process single images."""
@@ -165,15 +176,14 @@ def create_ome_zarr(data_folder: str, bellavista_output_folder: str, json_file_i
                 collection.add_image(image_name="Images", array=to_tczyx(da.concatenate(image_list), axes_names=("c", "z", "y", "x")), n_scales=n_scales)
 
         # save image names, these will be used as layer names when loading napari
-        f = open(os.path.join(bellavista_output_folder, "image_file_names.pkl"),"wb")
-        pickle.dump(image_file_names, f)
-        f.close()
-        print("OME-zarr image saved!", datetime.now(), end="\n\n")
+        with open(image_names_path, "wb") as f:
+            pickle.dump(image_file_names, f)
+
+        print(f"OME-Zarr image saved successfully at {datetime.now()}")
 
     except Exception as e:
-        # Log the exception with traceback
-        logger.error(f"Error in perform_task: {e}", exc_info=True)
-        # update exceptions dictionary to document an error
+        print(f'An error occurred in create_ome_zarr. Please check the log file for details: {os.path.join(bellavista_output_folder, 'error_log.log')}', end='\n\n')
+        logging.error(f"Error in create_ome_zarr: {e}", exc_info=True)
         exceptions['valid_image'] = False
 
     return exceptions

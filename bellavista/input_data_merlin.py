@@ -9,10 +9,6 @@ from typing import Dict
 from json import load
 import logging
 
-# Create a logger for this module
-logger = logging.getLogger(__name__)
-
-
 def create_micron_pixel(data_folder: str, bellavista_output_folder: str, json_file_input_files: Dict, exceptions: Dict):
 
     """
@@ -31,24 +27,26 @@ def create_micron_pixel(data_folder: str, bellavista_output_folder: str, json_fi
 
     # if transformations have been processed previously, exit
     if os.path.exists(os.path.join(bellavista_output_folder, "um_to_px_transforms.pkl")):
+        print("Micron to pixel transforms have been processed previously. Skipping reprocessing.")
         return exceptions
     
-    print('Calculating micron to pixel transform')
-
     microscope_parameters = json_file_input_files.get("microscope_parameters")
     positions_list = json_file_input_files.get("positions_list")
     
     if microscope_parameters is None: 
-        print("no microscope parameter file provided", end="\n\n")
+        print("No microscope parameter file provided")
+        logging.error(f"MISSING INPUT FILE: No microscope parameter file provided")
         exceptions['valid_image'] = False
         return exceptions 
     
     if positions_list is None: 
-        print("no position list provided")
+        print("No position file provided")
+        logging.error(f"MISSING INPUT FILE: No position file provided")
         exceptions['valid_image'] = False
         return exceptions
     
     try:
+        print('Calculating micron to pixel transform')
         with open(os.path.join(data_folder, microscope_parameters), 'r') as f:
             microscope_parameters = load(f)
 
@@ -57,14 +55,16 @@ def create_micron_pixel(data_folder: str, bellavista_output_folder: str, json_fi
         positions = pd.read_csv(os.path.join(data_folder, positions_list), header=None)
         minx, miny = float(min(positions[0])), float(min(positions[1]))
         um_to_px_transform_dict = {'um_per_pixel_x': um_per_pixel, 'um_per_pixel_y': um_per_pixel, 'x_shift': minx, 'y_shift': miny}
-        f = open(os.path.join(bellavista_output_folder, "um_to_px_transforms.pkl"),"wb")
-        pickle.dump(um_to_px_transform_dict, f)
-        f.close()
-        print('Micron to pixel transform saved!', end="\n\n")
+
+        with open(os.path.join(bellavista_output_folder, 'um_to_px_transforms.pkl'), 'wb') as f:
+            pickle.dump(um_to_px_transform_dict, f)
+
+        print('Micron to pixel transform saved!')
 
     except Exception as e: 
         # Log the exception with traceback
-        logger.error(f"Error in create_micron_pixel: {e}", exc_info=True)
+        print(f'An error occurred in create_micron_pixel. Please check the log file for details: {os.path.join(bellavista_output_folder, 'error_log.log')}', end='\n\n')
+        logging.error(f"Error in create_micron_pixel: {e}", exc_info=True)
         exceptions['valid_image'] = False
     return exceptions
 
@@ -86,23 +86,26 @@ def create_transcripts(data_folder: str, bellavista_output_folder: str, json_fil
     
     # if transcripts have been processed previously, exit
     if os.path.exists(os.path.join(bellavista_output_folder, "gene_dict.pkl")):
+        print("Transcripts have been processed previously. Skipping reprocessing.")
         return exceptions
     
-    print('Creating transcripts')
     transcript_filename = json_file_input_files.get("transcript_filename")
     codebook = json_file_input_files.get("codebook")
     
     if transcript_filename is None:
-        print("no transcript file provided", end="\n\n")
+        print("No transcript file provided")
+        logging.error(f"MISSING INPUT FILE: No transcript file provided")
         exceptions['valid_txs'] = False
         return exceptions
     
     if codebook is None:
-        print("no codebook file provided", end="\n\n")
+        print("No codebook file provided")
+        logging.error(f"MISSING INPUT FILE: No codebook file provided")
         exceptions['valid_txs'] = False
         return exceptions
 
     try:
+        print('Creating transcripts')
         txs_locations_df = pd.read_csv(os.path.join(data_folder, transcript_filename), delimiter=',')
         #map codebook to barcode ids 
         codebook_df = pd.read_csv(os.path.join(data_folder, codebook), delimiter=',')
@@ -116,14 +119,15 @@ def create_transcripts(data_folder: str, bellavista_output_folder: str, json_fil
             coords = group[['global_y', 'global_x']].values
             gene_dict[gene] = coords
 
-        f = open(os.path.join(bellavista_output_folder, "gene_dict.pkl"),"wb")
-        pickle.dump(gene_dict, f)
-        f.close()
-        print("Transcripts saved!", end="\n\n")
+        with open(os.path.join(bellavista_output_folder, 'gene_dict.pkl'), 'wb') as f:
+            pickle.dump(gene_dict, f)
+
+        print("Transcripts saved!")
 
     except Exception as e: 
         # Log the exception with traceback
-        logger.error(f"Error in create_transcripts: {e}\n\n", exc_info=True)
+        print(f'An error occurred in create_transcripts. Please check the log file for details: {os.path.join(bellavista_output_folder, 'error_log.log')}', end='\n\n')
+        logging.error(f"Error in create_transcripts: {e}", exc_info=True)
         exceptions['valid_txs'] = False
     return exceptions
 
@@ -143,7 +147,8 @@ def process_segmentations(data_folder: str, bellavista_output_folder: str, segme
     """
 
     if segmentation_folder is None: 
-        print(f"no {seg_type} segmentation folder provided", end="\n\n")
+        print(f"No {seg_type} segmentation folder provided")
+        logging.error(f"MISSING INPUT FILE: No {seg_type} segmentation folder provided")
         return False
 
     try:
@@ -151,7 +156,7 @@ def process_segmentations(data_folder: str, bellavista_output_folder: str, segme
         allcellbounds_array = []
         files = os.listdir(os.path.join(data_folder, segmentation_folder))
         counter = 0
-        for file in tqdm(files, desc=f'processing {seg_type} boundaries', total=len(files)):
+        for file in tqdm(files, desc=f'Processing {seg_type} boundaries', total=len(files)):
             if file.endswith(".hdf5"):
                 with h5py.File(os.path.join(data_folder, segmentation_folder, file), "r") as f:
                 
@@ -172,15 +177,15 @@ def process_segmentations(data_folder: str, bellavista_output_folder: str, segme
                                 counter += 1
                         except: pass 
 
-        f = open(os.path.join(bellavista_output_folder,f"{seg_type}_boundary_coords.pkl"),"wb")
-        pickle.dump(allcellbounds_array, f)
-        f.close()
+        with open(os.path.join(bellavista_output_folder, f"{seg_type}_boundary_coords.pkl"), 'wb') as f:
+            pickle.dump(allcellbounds_array, f)
 
-        print(f"{seg_type} boundaries saved!", end="\n\n")
+        print(f"{seg_type} boundaries saved!")
         return True
     except Exception as e: 
         # Log the exception with traceback
-        logger.error(f"Error in process_segmentations ({seg_type}): {e}\n\n", exc_info=True)
+        print(f'An error occurred in process_segmentations ({seg_type}). Please check the log file for details: {os.path.join(bellavista_output_folder, 'error_log.log')}', end='\n\n')
+        logging.error(f"Error in process_segmentations ({seg_type}): {e}", exc_info=True)
         return False
 
 def create_segmentations(data_folder: str, bellavista_output_folder: str, json_file_input_files: Dict, exceptions: Dict):
@@ -202,12 +207,17 @@ def create_segmentations(data_folder: str, bellavista_output_folder: str, json_f
     nuclear_segmentation_folder = json_file_input_files.get("nuclear_segmentation")
     z_plane = json_file_input_files.get("z_plane", 0)
 
-    if not os.path.exists(os.path.join(bellavista_output_folder, f"cell_boundary_coords.pkl")):
+    if os.path.exists(os.path.join(bellavista_output_folder, f'cell_boundary_coords.pkl')):
+        print(f"Cell segmentations have been processed previously. Skipping reprocessing.")
+    else:
         if not process_segmentations(data_folder, bellavista_output_folder, segmentation_folder=cell_segmentation_folder,
                                 seg_type="cell", z_plane=z_plane):
             # update exceptions dictionary to document an error
             exceptions[f'valid_cell_seg'] = False
-    if not os.path.exists(os.path.join(bellavista_output_folder, f"nuclear_boundary_coords.pkl")):
+
+    if os.path.exists(os.path.join(bellavista_output_folder, f'nuclear_boundary_coords.pkl')):
+        print(f"Nuclear segmentations have been processed previously. Skipping reprocessing.")
+    else:
         if not process_segmentations(data_folder, bellavista_output_folder, segmentation_folder=nuclear_segmentation_folder,
                                 seg_type="nuclear", z_plane=z_plane):
             # update exceptions dictionary to document an error
