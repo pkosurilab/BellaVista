@@ -1,0 +1,24 @@
+{ 
+    "system": "MERlin", 
+    "data_folder": "/path/to/merlin_outs",
+    "bella_vista_output_folder": "/path/to/merlin_outs/bellavista_outs",
+    "create_bellavista_inputs": true,
+
+    "visualization_parameters": { 
+        "plot_image": true,
+        "plot_transcripts": true,
+        "genes_visible_on_startup": false,
+        "plot_allgenes": true,
+        "plot_cell_seg": true
+    },
+
+    "input_files": {
+        "microscope_parameters": "microscope_parameters.json",
+        "codebook": "codebook.csv",
+        "positions_list": "positions.csv",
+        "images": "polyT_z3.tif",
+        "z_plane": 3,
+        "transcript_filename": "ExportBarcodes/barcodes.csv",
+        "cell_segmentation": "RefineCellDatabases/features"
+    }
+}

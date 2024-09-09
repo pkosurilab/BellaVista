@@ -1,0 +1,27 @@
+{ 
+    "system": "MERSCOPE",
+    "data_folder": "/path/to/vizgen_brain_s1r1",
+    "bella_vista_output_folder": "/path/to/vizgen_brain_s1r1/bellavista_outs",
+    "create_bellavista_inputs": true,
+
+    "visualization_parameters": { 
+        "plot_image": true,
+        "plot_transcripts": true,
+        "genes_visible_on_startup": true,
+        "plot_allgenes": false,
+        "selected_genes": ["Fgfr2","Tmem108","Glp2r","Slc47a1","Tacr1","Th",
+                            "Ntsr1","Sstr3","S1pr3","Sstr1","Ptgfr","Qrfpr",
+                            "Gpr101","Drd5","Chat"],
+        "plot_cell_seg": true,
+        "transcript_point_size": 0.75,
+        "contrast_limits": [0, 26000]
+    },
+    
+    "input_files": {
+        "transcript_filename": "detected_transcripts_S1R1.csv",
+        "images": "mosaic_DAPI_z3.tif",
+        "um_to_px_transform": "micron_to_mosaic_pixel_transform.csv",
+        "z_plane": 3,
+        "cell_segmentation": "cell_boundaries"
+    }
+}
