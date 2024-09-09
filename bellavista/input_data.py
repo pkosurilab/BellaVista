@@ -114,70 +114,56 @@ def create_ome_zarr(data_folder: str, bellavista_output_folder: str, json_file_i
 
     dask.config.set({"array.slicing.split_large_chunks": False})
 
-    try:
-        # images passed is a single image
-        if isinstance(images, str):
-            image_file_names = os.path.basename(images.replace('\\', '/')).split('.')[0]
+        def process_image(image_path: str, z_plane: int):
+            """Helper function to process single images."""
             try:
-                img_data = imread(os.path.join(data_folder, images))[z_plane]
-                # calculate number of pyramidal scales required to prevent napari downscaling image
-                max_dimension = max(img_data.shape)
-                min_n_scales = math.ceil(math.log(max_dimension / napari_size_limit, 2)) + 1
-                min_n_scales = max(min_n_scales, 1)
+                img_data = imread(os.path.join(data_folder, image_path))[z_plane]
+            except IndexError:  # if z_plane is out of bounds
+                print(f"z-plane {z_plane} is out of bounds, using plane 0 instead.")
+                img_data = imread(os.path.join(data_folder, image_path))[0]
+            return img_data
 
-                with open_ngff_zarr(store=bellavista_output_folder, dimension_separator="/", overwrite=True) as f:
-                    collection = f.add_collection(name="OMEzarrImages")
-                    collection.add_image(image_name="Images",
-                                            array=to_tczyx(img_data, axes_names=( "y", "x")), n_scales=min_n_scales)
-            except:
-                img_data = imread(os.path.join(data_folder, images))[0]
-                max_dimension = max(img_data.shape)
-                min_n_scales = math.ceil(math.log(max_dimension / napari_size_limit, 2)) + 1
-                min_n_scales = max(min_n_scales, 1)
-                with open_ngff_zarr(store = bellavista_output_folder, dimension_separator="/", overwrite=True) as f:
-                    collection = f.add_collection(name = "OMEzarrImages")
-                    collection.add_image(image_name = "Images", array=to_tczyx(img_data, axes_names=("y", "x")), n_scales = min_n_scales)
+        def calculate_scales(img_shape):
+            """Calculate the number of scales for pyramidal images."""
+            max_dimension = max(img_shape)
+            min_n_scales = math.ceil(math.log(max_dimension / napari_size_limit, 2)) + 1
+            return max(min_n_scales, 1)
 
-        # images passed is a list of images
-        elif isinstance(images, List):
+        if isinstance(images, str):  # single image case
+            print(f"Processing single image: {images}")
+            image_file_names = os.path.basename(images.replace('\\', '/')).split('.')[0]
+            img_data = process_image(images, z_plane)
+            n_scales = calculate_scales(img_data.shape)
 
-            img_shapes = []
+            with open_ngff_zarr(store=bellavista_output_folder, dimension_separator="/", overwrite=True) as f:
+                collection = f.add_collection(name="OMEzarrImages")
+                collection.add_image(image_name="Images", array=to_tczyx(img_data, axes_names=("y", "x")), n_scales=n_scales)
+
+        elif isinstance(images, list):  # multiple images case
+            print(f"Processing image list: {images}")
             image_list = []
-            # check if any of the images passed are 3D
-            # assumption that image dimensions are (z,y,x)
-            for image in images: 
+            img_shapes = []
 
+            for image in images:
                 img_data = imread(os.path.join(data_folder, image))
                 img_shape = img_data.shape
-                print(img_shape)
                 img_shapes.append(img_shape)
 
-                if(img_shape[0] > 1):
-                    # extract image from specified z plane
-                    try: 
-                        img_data_2d = img_data[z_plane]
-                    except: 
-                        z_plane = 0
-                        img_data_2d = img_data[z_plane]
-
+                if img_shape[0] > 1:  # 3D image case
+                    img_data_2d = process_image(image, z_plane)
                     image_list.append(da.expand_dims(img_data_2d, axis=0))
-                else: 
+                else:
                     image_list.append(img_data)
 
             image_list = [da.expand_dims(img, axis=0) for img in image_list]
-
-            img_x_shapes = [shape[2] for shape in img_shapes]
-            img_y_shapes = [shape[1] for shape in img_shapes]
-            max_dimension = max(max(img_x_shapes), max(img_y_shapes))
-            min_n_scales = math.ceil(math.log(max_dimension / napari_size_limit, 2)) + 1
-            min_n_scales = max(min_n_scales, 1)
+            max_dimension = max(max(shape[1] for shape in img_shapes), max(shape[2] for shape in img_shapes))
+            n_scales = calculate_scales((max_dimension, max_dimension))
 
             image_file_names = [os.path.basename(image.replace('\\', '/')).split('.')[0] for image in images]
-            with open_ngff_zarr(store = bellavista_output_folder, dimension_separator="/", overwrite=True) as f:
-                collection = f.add_collection(name = "OMEzarrImages")
-                collection.add_image(image_name = "Images", array=to_tczyx(da.concatenate(image_list), 
-                                        axes_names=("c", "z", "y", "x")), n_scales = min_n_scales)
-        
+            with open_ngff_zarr(store=bellavista_output_folder, dimension_separator="/", overwrite=True) as f:
+                collection = f.add_collection(name="OMEzarrImages")
+                collection.add_image(image_name="Images", array=to_tczyx(da.concatenate(image_list), axes_names=("c", "z", "y", "x")), n_scales=n_scales)
+
         # save image names, these will be used as layer names when loading napari
         f = open(os.path.join(bellavista_output_folder, "image_file_names.pkl"),"wb")
         pickle.dump(image_file_names, f)
