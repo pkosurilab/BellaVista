@@ -1,13 +1,14 @@
 { 
     "system": "xenium", 
-    "data_folder": "/path/to/Xenium_V1_FF_Mouse_Brain_MultiSection_3_outs",
-    "bella_vista_output_folder": "/path/to/Xenium_V1_FF_Mouse_Brain_MultiSection_3_outs/bellavista_outs",
+    "data_folder": "/path/to/xenium_brain_rep3",
+    "bella_vista_output_folder": "/path/to/xenium_brain_rep3/bellavista_outs",
     "create_bellavista_inputs": true,
 
     "visualization_parameters": {
         "plot_image": true,
         "plot_transcripts": true,
         "plot_allgenes": true,
+        "genes_visible_on_startup": false,
         "plot_cell_seg": false,
         "plot_nuclear_seg": false,
         "transcript_point_size": 0.75,
@@ -16,9 +17,8 @@
     },
 
     "input_files": {
-        "images": "morphology_mip.ome.tif",
-        "z_plane": 5,
         "transcript_filename": "transcripts.parquet",
+        "images": "morphology_mip.ome.tif",
         "cell_segmentation": "cell_boundaries.parquet",
         "nuclear_segmentation": "nucleus_boundaries.parquet"
     }
