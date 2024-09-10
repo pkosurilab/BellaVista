@@ -51,7 +51,7 @@ Download sample data: Xenium mouse brain dataset (Replicate 3). To download the 
       - This sample JSON can also be found in the GitHub repository: [BellaVista/sample_json/xenium_sample.json](https://github.com/pkosurilab/BellaVista/blob/updates/misc-changes/sample_json/xenium_sample.json)
         
 2. Replace the paths in `data_folder` and `bella_vista_output_folder` parameters
-      - JSON files cannot interpret the blackslash character (\\), instead you should use a forward slash (/)
+      - JSON files cannot interpret the backslash character (\\), instead you should use a forward slash (/)
 
 ```
 { 
