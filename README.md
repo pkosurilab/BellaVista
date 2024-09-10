@@ -73,9 +73,9 @@ Download sample data: Xenium mouse brain dataset (Replicate 3). To download the 
       },
 
       "input_files": {
+          "transcript_filename": "transcripts.parquet",
           "images": "morphology_mip.ome.tif",
           "z_plane": 5,
-          "transcript_filename": "transcripts.parquet",
           "cell_segmentation": "cell_boundaries.parquet",
           "nuclear_segmentation": "nucleus_boundaries.parquet"
       }
@@ -90,9 +90,11 @@ bellavista xenium_example.json
 > It will take a few minutes to create the required data files.\
 > The terminal will print updates & have progress bars for time consuming steps.
 
-> [!IMPORTANT]  
+> [!WARNING]
 > This is a large dataset, so if the program crashes or encounters a memory-related error, you may need to visualize a smaller subset of the data.
-> For more information, see [What should I do if the program crashes?](https://baby-stringbean.readthedocs.io/en/latest/faq.html#frequently-asked-questions) in our FAQ on the documentation website.
+> A sample JSON with a smaller subset of the data can be found here: [BellaVista/sample_json/xenium_sample_subset.json](https://github.com/pkosurilab/BellaVista/blob/updates/misc-changes/sample_json/xenium_sample_subset.json). Repeat steps 2 & 3 with this subsetted sample JSON.
+> 
+> For more information, see [What should I do if the program crashes?](https://baby-stringbean.readthedocs.io/en/latest/faq.html#frequently-asked-questions) in our [FAQ](https://baby-stringbean.readthedocs.io/en/latest/faq.html) on the documentation website.
 
 Once successfully loaded, you should see the message `Data Loaded!` in the terminal.\
 A napari window should appear displaying the data similar to the image below:
@@ -113,11 +115,11 @@ Try zooming in & out, toggling layers on & off to see different spatial patterns
 > [!TIP] 
 > To visualize a single layer, and hide all other layers, `Option/Alt-click` on the visibility button (the eye, to the left of the layer name). 
 >
-> Check out [our FAQ](https://baby-stringbean.readthedocs.io/en/latest/faq.html#helpful-napari-tips) on the documentation website for more tips!
+> Check out our [FAQ](https://baby-stringbean.readthedocs.io/en/latest/faq.html#helpful-napari-tips) on the documentation website for more tips!
 
 
 > [!NOTE]  
-> Gene colors are assigned randomly every time Bella Vista is launched. So, the gene colors displayed in your window will be different from the image above. Refer to [our FAQ](https://baby-stringbean.readthedocs.io/en/latest/faq.html#helpful-napari-tips) on the documentation website for information on how to configure gene colors and other customizable visualization options.
+> Gene colors are assigned randomly every time Bella Vista is launched. So, the gene colors displayed in your window will be different from the image above. Refer to our [FAQ](https://baby-stringbean.readthedocs.io/en/latest/faq.html#helpful-napari-tips) on the documentation website for information on how to configure gene colors and other customizable visualization options.
 >
 > To reproduce the same colors every time you launch Bella Vista, refer to the [figure guide](https://baby-stringbean.readthedocs.io/en/latest/figure_guide.html) on the documentation website.
 
