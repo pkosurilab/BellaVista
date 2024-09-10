@@ -33,7 +33,7 @@ def create_micron_pixel(data_folder: str, bellavista_output_folder: str, json_fi
 
     # if transformations have been processed previously, exit
     if os.path.exists(os.path.join(bellavista_output_folder, 'um_to_px_transforms.pkl')):
-        print("Micron to pixel transforms have been processed previously. Skipping reprocessing.")
+        print('Micron to pixel transforms have been processed previously. Skipping reprocessing.')
         return exceptions
     
     images = json_file_input_files.get('images')
@@ -79,7 +79,7 @@ def create_micron_pixel(data_folder: str, bellavista_output_folder: str, json_fi
 
     except Exception as e: 
         # Log the exception with traceback
-        print(f'An error occurred in create_micron_pixel. Please check the log file for details: {os.path.join(bellavista_output_folder, 'error_log.log')}', end='\n\n')
+        print(f'An error occurred in create_micron_pixel. Please check the log file for details: {os.path.join(bellavista_output_folder, "error_log.log")}', end='\n\n')
         logging.error(f'Error in create_micron_pixel: {e}', exc_info=True)
         # update exceptions dictionary to document an error
         exceptions['valid_image'] = False
@@ -103,7 +103,7 @@ def create_transcripts(data_folder: str, bellavista_output_folder: str, json_fil
     '''
     # if transcripts have been processed previously, exit
     if os.path.exists(os.path.join(bellavista_output_folder, 'gene_dict.pkl')):
-        print("Transcripts have been processed previously. Skipping reprocessing.")
+        print('Transcripts have been processed previously. Skipping reprocessing.')
         return exceptions
     
     transcript_filename = json_file_input_files.get('transcript_filename')
@@ -147,7 +147,7 @@ def create_transcripts(data_folder: str, bellavista_output_folder: str, json_fil
         
     except Exception as e: 
         # Log the exception with traceback
-        print(f'An error occurred in create_transcripts. Please check the log file for details: {os.path.join(bellavista_output_folder, 'error_log.log')}', end='\n\n')
+        print(f'An error occurred in create_transcripts. Please check the log file for details: {os.path.join(bellavista_output_folder, "error_log.log")}', end='\n\n')
         logging.error(f'Error in create_transcripts: {e}', exc_info=True)
         exceptions['valid_txs'] = False
     return exceptions
@@ -225,7 +225,7 @@ def process_segmentations(data_folder: str, bellavista_output_folder: str, segme
 
     except Exception as e: 
         # Log the exception with traceback
-        print(f'An error occurred in process_segmentations. Please check the log file for details: {os.path.join(bellavista_output_folder, 'error_log.log')}', end='\n\n')
+        print(f'An error occurred in process_segmentations. Please check the log file for details: {os.path.join(bellavista_output_folder, "error_log.log")}', end='\n\n')
         logging.error(f'Error in process_segmentations ({seg_type}) {e}', exc_info=True)
         return False 
 
@@ -249,7 +249,7 @@ def create_segmentations(data_folder: str, bellavista_output_folder: str, json_f
     
     # process segmentations
     if os.path.exists(os.path.join(bellavista_output_folder, f'cell_boundary_coords.pkl')):
-        print(f"Cell segmentations have been processed previously. Skipping reprocessing.")
+        print(f'Cell segmentations have been processed previously. Skipping reprocessing.')
     else:
         if not process_segmentations(data_folder, bellavista_output_folder, segmentation_file=cell_segmentation_file,
                                 seg_type='cell'):
@@ -257,7 +257,7 @@ def create_segmentations(data_folder: str, bellavista_output_folder: str, json_f
             exceptions[f'valid_cell_seg'] = False
 
     if os.path.exists(os.path.join(bellavista_output_folder, f'nuclear_boundary_coords.pkl')):
-        print(f"Nuclear segmentations have been processed previously. Skipping reprocessing.")
+        print(f'Nuclear segmentations have been processed previously. Skipping reprocessing.')
     else:
         if not process_segmentations(data_folder, bellavista_output_folder, segmentation_file=nuclear_segmentation_file,
                                     seg_type='nuclear'):
