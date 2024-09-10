@@ -8,7 +8,7 @@
 </p>
 <p align="center">
 
-Bella Vista enables visualization of imaging-based spatial transcriptomics data. It is an open-source Python package currently supporting 10x Genomics Xenium, Vizgen MERSCOPE, and custom (home-built) MERFISH datasets, utilizing [napari](https://napari.org/) for interactive data exploration. We developed Bella Vista to help the spatial transcriptomics community explore their data and create reproducible paper-ready figures. For more information, see our [documentation website](https://baby-stringbean.readthedocs.io/).
+Bella Vista enables visualization of imaging-based spatial transcriptomics data. It is an open-source Python package currently supporting 10x Genomics Xenium, Vizgen MERSCOPE, and custom (home-built) MERFISH datasets, utilizing [napari](https://napari.org/) for interactive data exploration. We developed Bella Vista to help the spatial transcriptomics community explore their data and create reproducible paper-ready figures. For more information, see our [documentation website](https://bellavista.readthedocs.io/en/latest/).
 
 ## Installation
 The following instructions require that you have [Anaconda](https://www.anaconda.com/) installed.
@@ -94,7 +94,7 @@ bellavista xenium_example.json
 > This is a large dataset, so if the program crashes or encounters a memory-related error, you may need to visualize a smaller subset of the data.
 > A sample JSON with a smaller subset of the data can be found here: [BellaVista/sample_json/xenium_sample_subset.json](https://github.com/pkosurilab/BellaVista/blob/updates/misc-changes/sample_json/xenium_sample_subset.json). Repeat steps 2 & 3 with this subsetted sample JSON.
 > 
-> For more information, see [What should I do if the program crashes?](https://baby-stringbean.readthedocs.io/en/latest/faq.html#frequently-asked-questions) in our [FAQ](https://baby-stringbean.readthedocs.io/en/latest/faq.html) on the documentation website.
+> For more information, see [What should I do if the program crashes?](https://bellavista.readthedocs.io/en/latest/faq.html#frequently-asked-questions) in our [FAQ](https://bellavista.readthedocs.io/en/latest/faq.html) on the documentation website.
 
 Once successfully loaded, you should see the message `Data Loaded!` in the terminal.\
 A napari window should appear displaying the data similar to the image below:
@@ -115,16 +115,16 @@ Try zooming in & out, toggling layers on & off to see different spatial patterns
 > [!TIP] 
 > To visualize a single layer, and hide all other layers, `Option/Alt-click` on the visibility button (the eye, to the left of the layer name). 
 >
-> Check out our [FAQ](https://baby-stringbean.readthedocs.io/en/latest/faq.html#helpful-napari-tips) on the documentation website for more tips!
+> Check out our [FAQ](https://bellavista.readthedocs.io/en/latest/faq.html#helpful-napari-tips) on the documentation website for more tips!
 
 
 > [!NOTE]  
-> Gene colors are assigned randomly every time Bella Vista is launched. So, the gene colors displayed in your window will be different from the image above. Refer to our [FAQ](https://baby-stringbean.readthedocs.io/en/latest/faq.html#helpful-napari-tips) on the documentation website for information on how to configure gene colors and other customizable visualization options.
+> Gene colors are assigned randomly every time Bella Vista is launched. So, the gene colors displayed in your window will be different from the image above. Refer to our [FAQ](https://bellavista.readthedocs.io/en/latest/faq.html#helpful-napari-tips) on the documentation website for information on how to configure gene colors and other customizable visualization options.
 >
-> To reproduce the same colors every time you launch Bella Vista, refer to the [figure guide](https://baby-stringbean.readthedocs.io/en/latest/figure_guide.html) on the documentation website.
+> To reproduce the same colors every time you launch Bella Vista, refer to the [figure guide](https://bellavista.readthedocs.io/en/latest/figure_guide.html) on the documentation website.
 
 
-For an exact reproduction of the two screenshots above, please refer to the figure guide: [Reproducing sample figures (Xenium)](https://baby-stringbean.readthedocs.io/en/latest/figure_guide.html#reproducing-sample-figures-xenium) on the documentation website.
+For an exact reproduction of the two screenshots above, please refer to the figure guide: [Reproducing sample figures (Xenium)](https://bellavista.readthedocs.io/en/latest/figure_guide.html#reproducing-sample-figures-xenium) on the documentation website.
 
 
-## To run Bella Vista with your own data, refer to the tutorials on the [documentation website](https://baby-stringbean.readthedocs.io). 
+### To run Bella Vista with your own data, refer to the tutorials on the documentation website: [bellavista.readthedocs.io](https://bellavista.readthedocs.io/en/latest)
