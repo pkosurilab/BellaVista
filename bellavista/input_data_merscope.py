@@ -33,7 +33,8 @@ def create_micron_pixel(data_folder: str, bellavista_output_folder: str, json_fi
     um_to_px_transform = json_file_input_files.get('um_to_px_transform')
     
     if um_to_px_transform is None: 
-        print('No um_to_px_transform file provided')
+        print('No um_to_px_transform file provided, skipping processing. `plot_image` will remain false until a valid file is given.')
+        logging.warning(f'MISSING INPUT FILE: No um_to_px_transform file provided --> cannot process to pixel transforms. `plot_image` will remain false until a valid file is given.')
         exceptions['valid_image'] = False
         return exceptions
     
@@ -55,7 +56,8 @@ def create_micron_pixel(data_folder: str, bellavista_output_folder: str, json_fi
     
     except Exception as e: 
         # Log the exception with traceback
-        print(f'An error occurred in create_micron_pixel. Please check the log file for details: {os.path.join(bellavista_output_folder, "error_log.log")}', end='\n\n')
+        print(f'An error occurred in create_micron_pixel. `plot_image` will remain false until the error is resolved.')
+        print(f'Please check the log file for details: {os.path.join(bellavista_output_folder, "error_log.log")}', end='\n\n')
         logging.error(f'Error in create_micron_pixel: {e}', exc_info=True)
         exceptions['valid_image'] = False
 
@@ -84,7 +86,8 @@ def create_transcripts(data_folder: str, bellavista_output_folder: str, json_fil
     transcript_filename = json_file_input_files.get('transcript_filename')
     
     if transcript_filename is None: 
-        print('No transcript file provided')
+        print('No transcript file provided, skipping processing. `plot_transcripts` will remain false until a valid file is given.')
+        logging.warning(f'MISSING INPUT FILE: No transcript file provided --> cannot process transcripts. `plot_transcripts` will remain false until a valid file is given.')
         exceptions['valid_txs'] = False
         return exceptions
 
@@ -107,7 +110,8 @@ def create_transcripts(data_folder: str, bellavista_output_folder: str, json_fil
 
     except Exception as e: 
         # Log the exception with traceback
-        print(f'An error occurred in create_transcripts. Please check the log file for details: {os.path.join(bellavista_output_folder, "error_log.log")}', end='\n\n')
+        print(f'An error occurred in create_transcripts. `plot_transcripts` will remain false until the error is resolved.')
+        print(f'Please check the log file for details: {os.path.join(bellavista_output_folder, "error_log.log")}', end='\n\n')
         logging.error(f'Error in create_transcripts: {e}', exc_info=True)
         exceptions['valid_txs'] = False
     return exceptions
@@ -129,7 +133,8 @@ def process_segmentations(data_folder: str, bellavista_output_folder: str, segme
     '''
     
     if segmentation_file is None:
-        print(f'No {seg_type} segmentation file provided')
+        print(f'No {seg_type} segmentation file provided, skipping segmentation processing. `plot_{seg_type}_seg` will remain false until a valid file is given.')
+        logging.warning(f'MISSING INPUT FILE: No {seg_type} segmentation folder provided --> cannot process {seg_type} segmentations. `plot_{seg_type}_seg` will remain false until a valid file is given.')
         return False
     
     try: 
@@ -188,7 +193,8 @@ def process_segmentations(data_folder: str, bellavista_output_folder: str, segme
         
     except Exception as e: 
         # Log the exception with traceback
-        print(f'An error occurred in process_segmentations. Please check the log file for details: {os.path.join(bellavista_output_folder, "error_log.log")}', end='\n\n')
+        print(f'An error occurred in process_segmentations ({seg_type}). `plot_{seg_type}_seg` will remain false until the error is resolved.')
+        print(f'Please check the log file for details: {os.path.join(bellavista_output_folder, "error_log.log")}', end='\n\n')
         logging.error(f'Error in process_segmentations ({seg_type}): {e}', exc_info=True)
         print()
         return False

@@ -34,14 +34,14 @@ def create_micron_pixel(data_folder: str, bellavista_output_folder: str, json_fi
     positions_list = json_file_input_files.get('positions_list')
     
     if microscope_parameters is None: 
-        print('No microscope parameter file provided')
-        logging.error(f'MISSING INPUT FILE: No microscope parameter file provided')
+        print('No microscope parameter file provided, skipping processing. `plot_image` will remain false until a valid file is given.')
+        logging.warning(f'MISSING INPUT FILE: No microscope parameter file provided --> cannot process micron to pixel transforms. `plot_image` will remain false until a valid file is given.')
         exceptions['valid_image'] = False
         return exceptions 
     
     if positions_list is None: 
-        print('No position file provided')
-        logging.error(f'MISSING INPUT FILE: No position file provided')
+        print('No position file provided, skipping processing. `plot_image` will remain false until a valid file is given.')
+        logging.warning(f'MISSING INPUT FILE: No position file provided --> cannot process micron to pixel transforms. `plot_image` will remain false until a valid file is given.')
         exceptions['valid_image'] = False
         return exceptions
     
@@ -63,7 +63,8 @@ def create_micron_pixel(data_folder: str, bellavista_output_folder: str, json_fi
 
     except Exception as e: 
         # Log the exception with traceback
-        print(f'An error occurred in create_micron_pixel. Please check the log file for details: {os.path.join(bellavista_output_folder, "error_log.log")}', end='\n\n')
+        print(f'An error occurred in create_micron_pixel. `plot_image` will remain false until the error is resolved.')
+        print(f'Please check the log file for details: {os.path.join(bellavista_output_folder, "error_log.log")}', end='\n\n')
         logging.error(f'Error in create_micron_pixel: {e}', exc_info=True)
         exceptions['valid_image'] = False
     return exceptions
@@ -93,14 +94,14 @@ def create_transcripts(data_folder: str, bellavista_output_folder: str, json_fil
     codebook = json_file_input_files.get('codebook')
     
     if transcript_filename is None:
-        print('No transcript file provided')
-        logging.error(f'MISSING INPUT FILE: No transcript file provided')
+        print('No transcript file provided, skipping processing. `plot_transcripts` will remain false until a valid file is given.')
+        logging.warning(f'MISSING INPUT FILE: No transcript file provided --> cannot process transcripts. `plot_transcripts` will remain false until a valid file is given.')
         exceptions['valid_txs'] = False
         return exceptions
     
     if codebook is None:
-        print('No codebook file provided')
-        logging.error(f'MISSING INPUT FILE: No codebook file provided')
+        print('No codebook file provided, skipping transcript processing. `plot_transcripts` will remain false until a valid file is given.')
+        logging.warning(f'MISSING INPUT FILE: No codebook file provided --> cannot process transcripts. `plot_transcripts` will remain false until a valid file is given.')
         exceptions['valid_txs'] = False
         return exceptions
 
@@ -126,7 +127,8 @@ def create_transcripts(data_folder: str, bellavista_output_folder: str, json_fil
 
     except Exception as e: 
         # Log the exception with traceback
-        print(f'An error occurred in create_transcripts. Please check the log file for details: {os.path.join(bellavista_output_folder, "error_log.log")}', end='\n\n')
+        print(f'An error occurred in create_transcripts. `plot_transcripts` will remain false until the error is resolved.')
+        print(f'Please check the log file for details: {os.path.join(bellavista_output_folder, "error_log.log")}', end='\n\n')
         logging.error(f'Error in create_transcripts: {e}', exc_info=True)
         exceptions['valid_txs'] = False
     return exceptions
@@ -147,8 +149,8 @@ def process_segmentations(data_folder: str, bellavista_output_folder: str, segme
     '''
 
     if segmentation_folder is None: 
-        print(f'No {seg_type} segmentation folder provided')
-        logging.error(f'MISSING INPUT FILE: No {seg_type} segmentation folder provided')
+        print(f'No {seg_type} segmentation folder provided, skipping segmentation processing. `plot_{seg_type}_seg` will remain false until a valid file is given.')
+        logging.warning(f'MISSING INPUT FILE: No {seg_type} segmentation folder provided --> cannot process {seg_type} segmentations. `plot_{seg_type}_seg` will remain false until a valid file is given.')
         return False
 
     try:
@@ -184,7 +186,8 @@ def process_segmentations(data_folder: str, bellavista_output_folder: str, segme
         return True
     except Exception as e: 
         # Log the exception with traceback
-        print(f'An error occurred in process_segmentations ({seg_type}). Please check the log file for details: {os.path.join(bellavista_output_folder, "error_log.log")}', end='\n\n')
+        print(f'An error occurred in process_segmentations ({seg_type}). `plot_{seg_type}_seg` will remain false until the error is resolved.') 
+        print(f'Please check the log file for details: {os.path.join(bellavista_output_folder, "error_log.log")}', end='\n\n')
         logging.error(f'Error in process_segmentations ({seg_type}): {e}', exc_info=True)
         return False
 

@@ -14,8 +14,6 @@ from napari.utils.colormaps import AVAILABLE_COLORMAPS
 from matplotlib import colors as mpl_colors
 from tqdm import tqdm
 
-logger = logging.getLogger(__name__)
-
 def bellavista(
         bella_vista_output_folder,
         plot_image=False,
@@ -67,10 +65,11 @@ def bellavista(
         else:
             viewer.open(os.path.join(bella_vista_output_folder, 'OMEzarrImages/Images'), plugin='napari-ome-zarr', scale = (1, um_per_pixel_y, um_per_pixel_x), \
                         translate = (0, y_shift, x_shift), blending = 'additive', contrast_limits = contrast_limits, name = image_file_names, channel_axis= 1, rotate=rotate_angle) #create napari image layer 
-
+    
+    if(plot_transcripts):
         gene_dict = pickle.load(open(os.path.join(bella_vista_output_folder,'gene_dict.pkl'),'rb'))
         sorted_gene_names = sorted(gene_dict.keys(), reverse=True) #reverse the order of the genes so that the genes are in alphabetical order
-
+    
         # load subset of user-specified genes
         if not plot_allgenes and selected_genes is not None and len(selected_genes) > 0:
             for gene in tqdm(selected_genes, desc = 'Loading gene transcripts...', total = len(selected_genes)):

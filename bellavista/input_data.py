@@ -13,9 +13,13 @@ from typing import Dict, List
 import logging
 
 def setup_logger(bellavista_output_folder: str):
+    # Remove any handlers that were set up earlier
+    for handler in logging.root.handlers[:]:
+        logging.root.removeHandler(handler)
+        
     # Set a log file in the output folder
     logging.basicConfig(filename=os.path.join(bellavista_output_folder, 'error_log.log'),  # Absolute path
-                        level=logging.ERROR,
+                        level=logging.WARNING,
                         format='%(asctime)s - %(levelname)s - %(message)s')
 
 def create_inputs(json_file: Dict):
@@ -115,7 +119,8 @@ def create_ome_zarr(data_folder: str, bellavista_output_folder: str, json_file_i
         z_plane = json_file_input_files.get('z_plane', 0)
 
         if images is None:
-            print('No input image files provided')
+            print('No input image files provided, skipping processing. `plot_image` will remain false until a valid file is given.')
+            logging.warning('MISSING INPUT FILE: No input image files provided --> cannot process images. `plot_image` will remain false until a valid file is given.')
             exceptions['valid_image'] = False
             return exceptions
         
@@ -182,7 +187,8 @@ def create_ome_zarr(data_folder: str, bellavista_output_folder: str, json_file_i
         print(f'OME-Zarr image saved successfully at {datetime.now()}')
 
     except Exception as e:
-        print(f'An error occurred in create_ome_zarr. Please check the log file for details: {os.path.join(bellavista_output_folder, "error_log.log")}', end='\n\n')
+        print(f'An error occurred in create_ome_zarr. `plot_image` will remain false until the error is resolved.')
+        print(f'Please check the log file for details: {os.path.join(bellavista_output_folder, "error_log.log")}', end='\n\n')
         logging.error(f'Error in create_ome_zarr: {e}', exc_info=True)
         exceptions['valid_image'] = False
 
