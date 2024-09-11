@@ -109,10 +109,12 @@ Once successfully loaded, you should see the message `Data Loaded!` in the termi
 A napari window should appear displaying the data similar to the image below:
 
 <img src="https://github.com/pkosurilab/BellaVista/blob/main/images/xenium_initial.png?raw=true" alt="Initial napari load page"/>
+
 <br/>
 
 Now, you can interactively move around the napari canvas to explore the data!\
 Try zooming in & out, toggling layers on & off to see different spatial patterns:
+
 
 <p align="left">
   <img src="https://github.com/pkosurilab/BellaVista/blob/main/images/xenium_brain_position_0_select.png?raw=true" alt="zoom out screenshot" />
