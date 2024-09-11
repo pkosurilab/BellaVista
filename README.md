@@ -19,7 +19,7 @@ The following instructions require that you have [Anaconda](https://www.anaconda
 Create and activate a new virtual environment:
 
 ```
-conda create -n bellavista_env python=3.9
+conda create -n bellavista_env python
 conda activate bellavista_env
 ```
 
