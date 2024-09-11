@@ -15,7 +15,7 @@ from matplotlib import colors as mpl_colors
 from tqdm import tqdm
 
 def bellavista(
-        bella_vista_output_folder,
+        bellavista_output_folder,
         plot_image=False,
         plot_transcripts=False,
         plot_allgenes=True,
@@ -32,7 +32,7 @@ def bellavista(
     txs_colors = plt.cm.gist_rainbow(np.linspace(0, 1, 1025))
 
     # check for any exceptions caused while creating input data
-    with open(os.path.join(bella_vista_output_folder, 'exceptions.json'), 'r') as f:
+    with open(os.path.join(bellavista_output_folder, 'exceptions.json'), 'r') as f:
         exceptions_json_file = load(f)
     if exceptions_json_file.get('valid_image') is not None:
         plot_image = False
@@ -50,9 +50,9 @@ def bellavista(
     viewer = napari.Viewer()
 
     if(plot_image): 
-        image_file_names = pickle.load(open(os.path.join(bella_vista_output_folder,'image_file_names.pkl'),'rb'))
+        image_file_names = pickle.load(open(os.path.join(bellavista_output_folder,'image_file_names.pkl'),'rb'))
         # load transformations to align images with transcripts & segmentations
-        um_per_pixel_dict = pickle.load(open(os.path.join(bella_vista_output_folder,'um_to_px_transforms.pkl'),'rb'))
+        um_per_pixel_dict = pickle.load(open(os.path.join(bellavista_output_folder,'um_to_px_transforms.pkl'),'rb'))
         um_per_pixel_x = um_per_pixel_dict['um_per_pixel_x']
         um_per_pixel_y = um_per_pixel_dict['um_per_pixel_y']
         x_shift = um_per_pixel_dict['x_shift']
@@ -60,14 +60,14 @@ def bellavista(
 
         print('Loading image...')
         if contrast_limits is None:
-            viewer.open(os.path.join(bella_vista_output_folder, 'OMEzarrImages/Images'), plugin='napari-ome-zarr', scale = (1, um_per_pixel_y, um_per_pixel_x), \
+            viewer.open(os.path.join(bellavista_output_folder, 'OMEzarrImages/Images'), plugin='napari-ome-zarr', scale = (1, um_per_pixel_y, um_per_pixel_x), \
                         translate = (0, y_shift, x_shift), blending = 'additive', name = image_file_names, channel_axis= 1, rotate=rotate_angle) #create napari image layer 
         else:
-            viewer.open(os.path.join(bella_vista_output_folder, 'OMEzarrImages/Images'), plugin='napari-ome-zarr', scale = (1, um_per_pixel_y, um_per_pixel_x), \
+            viewer.open(os.path.join(bellavista_output_folder, 'OMEzarrImages/Images'), plugin='napari-ome-zarr', scale = (1, um_per_pixel_y, um_per_pixel_x), \
                         translate = (0, y_shift, x_shift), blending = 'additive', contrast_limits = contrast_limits, name = image_file_names, channel_axis= 1, rotate=rotate_angle) #create napari image layer 
     
     if(plot_transcripts):
-        gene_dict = pickle.load(open(os.path.join(bella_vista_output_folder,'gene_dict.pkl'),'rb'))
+        gene_dict = pickle.load(open(os.path.join(bellavista_output_folder,'gene_dict.pkl'),'rb'))
         sorted_gene_names = sorted(gene_dict.keys(), reverse=True) #reverse the order of the genes so that the genes are in alphabetical order
     
         # load subset of user-specified genes
@@ -101,7 +101,7 @@ def bellavista(
         custom_cmap = Colormap(colors, name='cell_cmap')
         AVAILABLE_COLORMAPS['cell_cmap'] = custom_cmap
 
-        coords = pickle.load(open(os.path.join(bella_vista_output_folder,'cell_boundary_coords.pkl'),'rb'))
+        coords = pickle.load(open(os.path.join(bellavista_output_folder,'cell_boundary_coords.pkl'),'rb'))
         viewer.add_tracks(coords, name='cell boundaries', colormap='cell_cmap', visible=False, blending = 'opaque', rotate=rotate_angle)
 
     if(plot_nuclear_seg):
@@ -111,7 +111,7 @@ def bellavista(
         custom_cmap = Colormap(colors, name='nuclear_cmap')
         AVAILABLE_COLORMAPS['nuclear_cmap'] = custom_cmap
 
-        coords = pickle.load(open(os.path.join(bella_vista_output_folder,'nuclear_boundary_coords.pkl'),'rb'))
+        coords = pickle.load(open(os.path.join(bellavista_output_folder,'nuclear_boundary_coords.pkl'),'rb'))
         viewer.add_tracks(coords, name='nuclear boundaries', colormap='nuclear_cmap', visible=False, blending = 'opaque', rotate=rotate_angle)
     
     viewer.reset_view()
@@ -136,14 +136,18 @@ def main():
     # load dataset-specific JSON (first argument)
     with open(input_file, 'r') as f:
         json_file = load(f)
+        data_folder = json_file.get('data_folder')
+        data_folder = data_folder.replace('\\', '/')
         json_file_param = json_file.get('visualization_parameters')
         create_bellavista_inputs = json_file.get('create_bellavista_inputs', True)
-    
+        
     if(create_bellavista_inputs == True):
         input_data.create_inputs(json_file)
 
+    bellavista_output_folder = os.path.join(data_folder, "BellaVista_output")
+
     bellavista(
-        bella_vista_output_folder=json_file.get('bella_vista_output_folder'),
+        bellavista_output_folder=bellavista_output_folder,
         plot_image=json_file_param.get('plot_image', False),
         plot_transcripts=json_file_param.get('plot_transcripts', False),
         plot_allgenes=json_file_param.get('plot_allgenes', True),

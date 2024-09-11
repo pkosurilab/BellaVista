@@ -36,15 +36,18 @@ def create_inputs(json_file: Dict):
     '''
 
     data_folder = json_file.get('data_folder')
+    data_folder = data_folder.replace('\\', '/')
     if not os.path.exists(data_folder):
         raise FileNotFoundError(f'Directory {data_folder} does not exist.')
 
     json_file_input_files = json_file.get('input_files')
 
-    bellavista_output_folder = json_file.get('bella_vista_output_folder')
+    bellavista_output_folder = os.path.join(data_folder, "BellaVista_output")
     if not os.path.exists(bellavista_output_folder):
         print(f'Directory {bellavista_output_folder} does not exist -- creating the directory!')
         os.makedirs(bellavista_output_folder)
+    else: 
+        print(f'Directory {bellavista_output_folder} exists, processing new input files')
     
     setup_logger(bellavista_output_folder)
 
@@ -124,7 +127,7 @@ def create_ome_zarr(data_folder: str, bellavista_output_folder: str, json_file_i
             exceptions['valid_image'] = False
             return exceptions
         
-        print(f'Creating OME-Zarr image at {datetime.now()}')
+        print(f'Creating OME-Zarr image at {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
 
         # OpenGL max texture size - napari will downscale image if OME-Zarr tile exceeds this shape
         napari_size_limit = 16384
@@ -135,8 +138,12 @@ def create_ome_zarr(data_folder: str, bellavista_output_folder: str, json_file_i
             try:
                 img_data = imread(os.path.join(data_folder, image_path))[z_plane]
             except IndexError:  # if z_plane is out of bounds
-                print(f'z-plane {z_plane} is out of bounds, using plane 0 instead.')
-                img_data = imread(os.path.join(data_folder, image_path))[0]
+                img_data = imread(os.path.join(data_folder, image_path))
+                if len(img_data) > 1:
+                    print(f'z-plane {z_plane} is out of bounds, using plane 0 instead.')
+                    img_data = imread(os.path.join(data_folder, image_path))[0]
+                else: 
+                    img_data = imread(os.path.join(data_folder, image_path))[0]
             return img_data
 
         def calculate_scales(img_shape):
@@ -184,7 +191,7 @@ def create_ome_zarr(data_folder: str, bellavista_output_folder: str, json_file_i
         with open(image_names_path, 'wb') as f:
             pickle.dump(image_file_names, f)
 
-        print(f'OME-Zarr image saved successfully at {datetime.now()}')
+        print(f'OME-Zarr image saved successfully at {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
 
     except Exception as e:
         print(f'An error occurred in create_ome_zarr. `plot_image` will remain false until the error is resolved.')
