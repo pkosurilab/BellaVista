@@ -55,14 +55,12 @@ Below is a short tutorial for loading Bella Vista with sample Xenium data. This 
 2. Copy and save contents below into a new JSON file called `xenium_sample.json`
       - This sample JSON can also be found in the GitHub repository: [BellaVista/sample_json/xenium_sample.json](https://github.com/pkosurilab/BellaVista/blob/main/sample_json/xenium_sample.json)
         
-3. Replace the paths in `data_folder` and `bella_vista_output_folder` parameters
-      - JSON files cannot interpret the backslash character (\\), instead you should use a forward slash (/)
-
+3. Replace the path in `data_folder`
+      - Python cannot parse JSON files containing file paths with single backslashes (\\). To avoid errors, use either forward slashes (/) or double backslashes (\\\\) when representing file paths in the JSON strings.
 ```
 { 
       "system": "xenium", 
       "data_folder": "/path/to/xenium_brain_rep3",
-      "bella_vista_output_folder": "/path/to/xenium_brain_rep3/bellavista_outs",
       "create_bellavista_inputs": true,
 
       "visualization_parameters": {

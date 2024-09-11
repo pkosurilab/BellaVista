@@ -1,7 +1,6 @@
 {
     "system": "xenium",
     "data_folder": "/path/to/xenium_brain_rep3",
-    "bella_vista_output_folder": "/path/to/xenium_brain_rep3/bellavista_outs",
     "create_bellavista_inputs": true,
   
     "visualization_parameters": {

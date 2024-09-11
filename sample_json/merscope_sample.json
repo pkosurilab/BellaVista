@@ -1,7 +1,6 @@
 { 
     "system": "MERSCOPE",
     "data_folder": "/path/to/vizgen_brain_s1r1",
-    "bella_vista_output_folder": "/path/to/vizgen_brain_s1r1/bellavista_outs",
     "create_bellavista_inputs": true,
 
     "visualization_parameters": { 

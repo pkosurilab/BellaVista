@@ -1,7 +1,6 @@
 { 
     "system": "MERlin", 
     "data_folder": "/path/to/merlin_outs",
-    "bella_vista_output_folder": "/path/to/merlin_outs/bellavista_outs",
     "create_bellavista_inputs": true,
 
     "visualization_parameters": { 
