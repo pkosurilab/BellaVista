@@ -43,14 +43,10 @@ pip install -e BellaVista
 
 Below is a short tutorial for loading Bella Vista with sample Xenium data. This tutorial can also be found in the [Xenium tutorial page](https://bellavista.readthedocs.io/en/latest/bellavista_tutorials/10x_xenium.html) on the documentation website.
 
-### Download Sample Data
-
-1. Download sample data: Xenium mouse brain dataset (Replicate 3).
+1. Download sample data: [Xenium mouse brain dataset (Replicate 3)](https://www.10xgenomics.com/datasets/fresh-frozen-mouse-brain-replicates-1-standard)
   - To download the dataset, 10x Genomics may ask you to fill out a questionnaire.
   - Unzip the downloaded zip file. This will create a folder named "Xenium_V1_FF_Mouse_Brain_MultiSection_3_outs".
   - Take note of your local path to this folder, as you will need this path when running Bella Vista.
-
-Download link: [https://www.10xgenomics.com/datasets/fresh-frozen-mouse-brain-replicates-1-standard](https://www.10xgenomics.com/datasets/fresh-frozen-mouse-brain-replicates-1-standard)
 
 <img src="https://github.com/pkosurilab/BellaVista/blob/main/images/xenium_testdata_location.png?raw=true" alt="Xenium sample data website location" width="600" />
 
