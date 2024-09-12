@@ -12,8 +12,9 @@ Bella Vista enables visualization of imaging-based spatial transcriptomics data.
 
 ## Installation
 The following instructions require that you have [Anaconda](https://www.anaconda.com/) installed.
-- It is recommended to create an Anaconda virtual environment to prevent conflicting package dependencies. 
 <!-- - The package can be installed from PyPI via [pip](https://pypi.org/project/pip/) (recommended) or from the [GitHub repository](https://github.com/pkosurilab/BellaVista). -->
+- In MacOS, run the following commands from the Terminal.
+- In Windows, run the following commands from the Anaconda Prompt.
 - Bella Vista requires python 3.9 or above.
 
 Create and activate a new virtual environment:
@@ -44,52 +45,20 @@ Below is a short tutorial for loading Bella Vista with sample Xenium data. This 
 
 ### Download Sample Data
 
-1. Download sample data: Xenium mouse brain dataset (Replicate 3). To download the dataset, 10x Genomics may ask you to fill out a questionnaire.
+1. Download sample data: Xenium mouse brain dataset (Replicate 3).
+  - To download the dataset, 10x Genomics may ask you to fill out a questionnaire.
+  - Unzip the downloaded zip file. This will create a folder named "Xenium_V1_FF_Mouse_Brain_MultiSection_3_outs".
+  - Take note of your local path to this folder, as you will need this path when running Bella Vista.
 
-[https://www.10xgenomics.com/datasets/fresh-frozen-mouse-brain-replicates-1-standard](https://www.10xgenomics.com/datasets/fresh-frozen-mouse-brain-replicates-1-standard)
+Download link: [https://www.10xgenomics.com/datasets/fresh-frozen-mouse-brain-replicates-1-standard](https://www.10xgenomics.com/datasets/fresh-frozen-mouse-brain-replicates-1-standard)
 
 <img src="https://github.com/pkosurilab/BellaVista/blob/main/images/xenium_testdata_location.png?raw=true" alt="Xenium sample data website location" width="600" />
 
-### Load Bella Vista 
-
-2. Copy and save contents below into a new JSON file called `xenium_sample.json`
-      - This sample JSON can also be found in the GitHub repository: [BellaVista/sample_json/xenium_sample.json](https://github.com/pkosurilab/BellaVista/blob/main/sample_json/xenium_sample.json)
-        
-3. Replace the path in `data_folder`
-      - Python cannot parse JSON files containing file paths with single backslashes (\\). To avoid errors, use either forward slashes (/) or double backslashes (\\\\) when representing file paths in the JSON strings.
-```
-{ 
-      "system": "xenium", 
-      "data_folder": "/path/to/xenium_brain_rep3",
-      "create_bellavista_inputs": true,
-
-      "visualization_parameters": {
-          "plot_image": true,
-          "plot_transcripts": true,
-          "plot_allgenes": true,
-          "genes_visible_on_startup": false,
-          "plot_cell_seg": false,
-          "plot_nuclear_seg": false,
-          "transcript_point_size": 0.75,
-          "contrast_limits": [0, 5000],
-          "rotate_angle": 180
-      },
-
-      "input_files": {
-          "transcript_filename": "transcripts.parquet",
-          "images": "morphology_mip.ome.tif",
-          "cell_segmentation": "cell_boundaries.parquet",
-          "nuclear_segmentation": "nucleus_boundaries.parquet"
-      }
-}
-```
-<br/>
-
-4. In the terminal, run Bella Vista with the Xenium sample JSON:
-      - The JSON file argument should contain the file path to the JSON file.
+2. In the terminal, run Bella Vista with the Xenium sample data:
+      - Note: Before running this command, replace "/path/to/" with the actual path to the xenium sample data folder.
 
 ```
-bellavista xenium_example.json
+bellavista --xenium-sample-data /path/to/Xenium_V1_FF_Mouse_Brain_MultiSection_3_outs
 ```
 <br/>
 
