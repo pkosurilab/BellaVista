@@ -50,23 +50,16 @@ Below is a short tutorial for loading Bella Vista with sample Xenium data. This 
 
 <img src="https://github.com/pkosurilab/BellaVista/blob/main/images/xenium_testdata_location.png?raw=true" alt="Xenium sample data website location" width="600" />
 
-2. run Bella Vista from the command line with the Xenium sample data:
+2. Run Bella Vista from the command line with the Xenium sample data:
       - Note: Before running this command, replace "/path/to/" with the actual path to the xenium sample data folder.
 
 ```
-bellavista --xenium-sample-data /path/to/Xenium_V1_FF_Mouse_Brain_MultiSection_3_outs
+bellavista --xenium-sample /path/to/Xenium_V1_FF_Mouse_Brain_MultiSection_3_outs
 ```
 <br/>
 
 > [!NOTE]  
-> It will take a few minutes to create the required data files.\
-> The terminal will print updates & have progress bars for time consuming steps.
-
-> [!WARNING]
-> This is a large dataset, so if the program crashes or encounters a memory-related error, you may need to visualize a smaller subset of the data.
-> A sample JSON with a smaller subset of the data can be found here: [BellaVista/sample_json/xenium_sample_subset.json](https://github.com/pkosurilab/BellaVista/blob/main/sample_json/xenium_sample_subset.json). Repeat steps 2 & 3 with this subsetted sample JSON.
-> 
-> For more information, see [What should I do if the program crashes?](https://bellavista.readthedocs.io/en/latest/faq.html#frequently-asked-questions) in our [FAQ](https://bellavista.readthedocs.io/en/latest/faq.html) on the documentation website.
+> It will take a few minutes to create the required data files.
 
 <br/>
 Once successfully loaded, you should see the message `Data Loaded!` in the terminal. 
@@ -77,6 +70,12 @@ A napari window should appear displaying the data similar to the image below:
 
 <br/>
 
+> [!TIP]
+> This is a large dataset, so if the program encounters a memory-related error, try visualizing a smaller subset of the data:
+> ```
+> bellavista --xenium-sample-lite /path/to/Xenium_V1_FF_Mouse_Brain_MultiSection_3_outs
+>```
+> 
 Now, you can interactively move around the napari canvas to explore the data!\
 Try zooming in & out, toggling layers on & off to see different spatial patterns:
 
