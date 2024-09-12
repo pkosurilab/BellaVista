@@ -50,7 +50,7 @@ Below is a short tutorial for loading Bella Vista with sample Xenium data. This 
 
 <img src="https://github.com/pkosurilab/BellaVista/blob/main/images/xenium_testdata_location.png?raw=true" alt="Xenium sample data website location" width="600" />
 
-2. In the command line, run Bella Vista with the Xenium sample data:
+2. run Bella Vista from the command line with the Xenium sample data:
       - Note: Before running this command, replace "/path/to/" with the actual path to the xenium sample data folder.
 
 ```
