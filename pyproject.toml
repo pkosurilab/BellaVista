@@ -38,6 +38,10 @@ Issues = "https://github.com/pkosurilab/BellaVista/issues"
 
 [tool.setuptools]
 packages = ["bellavista"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+"bellavista" = ["utils/quickstart/*.json"]
 
 [project.scripts]
 bellavista = "bellavista.bellavista:main"

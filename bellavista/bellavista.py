@@ -2,6 +2,7 @@ from . import input_data
 import argparse
 import logging
 from json import load
+import importlib.resources as pkg_resources
 import sys
 import os
 import pickle 
@@ -122,24 +123,51 @@ def bellavista(
 
 def main():
 
-    # Check if input JSON file was provided
+    
     parser = argparse.ArgumentParser(description='Process input file for Bellavista.')
+    # user provided JSON file
     parser.add_argument('positional_input_file', type=str, nargs='?', help='Path to the input JSON file')
-    parser.add_argument('-i', '--input_file', type=str)
+    parser.add_argument('-i', '--input-file', type=str)
+    # sample JSON files
+    parser.add_argument('--xenium-sample', type=str)
+    parser.add_argument('--xenium-sample-lite', type=str)
     args = parser.parse_args()
-    input_file = args.input_file if args.input_file else args.positional_input_file
-    if not input_file:
-        print('Error: No input JSON file provided. You must provide an input file either as the first argument or with the -i/--input_file option.')
-        parser.print_help()
-        sys.exit(1)
 
-    # load dataset-specific JSON (first argument)
-    with open(input_file, 'r') as f:
-        json_file = load(f)
-        data_folder = json_file.get('data_folder')
-        data_folder = data_folder.replace('\\', '/')
-        json_file_param = json_file.get('visualization_parameters')
-        create_bellavista_inputs = json_file.get('create_bellavista_inputs', True)
+    # "Quick Start" tutorial sample JSONs
+    if args.xenium_sample:
+        sample_data_folder = args.xenium_sample
+        if not sample_data_folder:
+            print('Error: No sample data folder path provided. Usage: "bellavista --xenium-sample /path/to/xenium_sample_data"')
+            sys.exit(1)
+        with pkg_resources.open_text('bellavista.utils.quickstart', 'quickstart_xenium_sample.json') as f:
+            json_file = load(f)
+            json_file['data_folder'] = sample_data_folder
+    
+    elif args.xenium_sample_lite:
+        sample_data_folder = args.xenium_sample_lite
+        if not sample_data_folder:
+            print('Error: No sample data folder path provided. Usage: "bellavista --xenium-sample-lite /path/to/xenium_sample_data"')
+            sys.exit(1)
+        with pkg_resources.open_text('bellavista.utils.quickstart', 'quickstart_xenium_sample_lite.json') as f:
+            json_file = load(f)
+            json_file['data_folder'] = sample_data_folder
+    
+    # user defined JSON
+    else:
+        input_file = args.input_file if args.input_file else args.positional_input_file
+        if not input_file:
+            print('Error: No input JSON file provided. You must provide an input file either as the first argument or with the -i/--input_file option. If following the "Quick Start" tutorial, use the "--xenium-sample" option')
+            parser.print_help()
+            sys.exit(1)
+
+        # load dataset-specific JSON (first argument)
+        with open(input_file, 'r') as f:
+            json_file = load(f)
+    
+    data_folder = json_file.get('data_folder')
+    data_folder = data_folder.replace('\\', '/')
+    json_file_param = json_file.get('visualization_parameters')
+    create_bellavista_inputs = json_file.get('create_bellavista_inputs', True)
         
     if(create_bellavista_inputs == True):
         input_data.create_inputs(json_file)
