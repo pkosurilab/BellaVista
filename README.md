@@ -85,6 +85,7 @@ Try zooming in & out, toggling layers on & off to see different spatial patterns
 <p align="left">
   <img src="https://github.com/pkosurilab/BellaVista/blob/main/images/xenium_brain_position_0_select.png?raw=true" alt="zoom out screenshot" />
   <img src="https://github.com/pkosurilab/BellaVista/blob/main/images/xenium_brain_position_1.png?raw=true" alt="zoom in screenshot" />
+  <img src="https://github.com/pkosurilab/BellaVista/blob/updates/misc-changes/images/xenium_brain_position_2_cellbounds.png?raw=true" alt="zoom in cellbounds screenshot" />
 </p>
 
 <br/>
@@ -101,7 +102,7 @@ Try zooming in & out, toggling layers on & off to see different spatial patterns
 > To reproduce the same colors every time you launch Bella Vista, refer to the [figure guide](https://bellavista.readthedocs.io/en/latest/figure_guide.html) on the documentation website.
 <br/>
 
-For an exact reproduction of the two screenshots above, please refer to the figure guide: [Reproducing sample figures (Xenium)](https://bellavista.readthedocs.io/en/latest/figure_guide.html#reproducing-sample-figures-xenium) on the documentation website.
+For an exact reproduction of the screenshots above, please refer to the figure guide: [Reproducing sample figures (Xenium)](https://bellavista.readthedocs.io/en/latest/figure_guide.html#reproducing-sample-figures-xenium) on the documentation website.
 
 
 ### To run Bella Vista with your own data, refer to the tutorials on the [documentation website](https://bellavista.readthedocs.io/en/latest/tutorials.html).
