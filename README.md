@@ -68,7 +68,7 @@ Once successfully loaded, you should see the message `Data Loaded!` in the termi
 
 A napari window should appear displaying the data similar to the image below:
 
-<img src="https://github.com/pkosurilab/BellaVista/blob/main/images/xenium_initial.png?raw=true" alt="Initial napari load page"/>
+<img src="https://github.com/pkosurilab/BellaVista/blob/updates/misc-changes/images/xenium_initial.png?raw=true" alt="Initial napari load page"/>
 
 <br/>
 
