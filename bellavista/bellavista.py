@@ -1,6 +1,5 @@
 from . import input_data
 import argparse
-import logging
 from json import load
 import importlib.resources as pkg_resources
 import sys
@@ -18,6 +17,7 @@ from tqdm import tqdm
 def bellavista(
         bellavista_output_folder,
         plot_image=False,
+        image_colormap=None,
         plot_transcripts=False,
         plot_allgenes=True,
         genes_visible_on_startup=False,
@@ -60,12 +60,9 @@ def bellavista(
         y_shift = um_per_pixel_dict['y_shift']
 
         print('Loading image...')
-        if contrast_limits is None:
-            viewer.open(os.path.join(bellavista_output_folder, 'OMEzarrImages/Images'), plugin='napari-ome-zarr', scale = (1, um_per_pixel_y, um_per_pixel_x), \
-                        translate = (0, y_shift, x_shift), blending = 'additive', name = image_file_names, channel_axis= 1, rotate=rotate_angle) #create napari image layer 
-        else:
-            viewer.open(os.path.join(bellavista_output_folder, 'OMEzarrImages/Images'), plugin='napari-ome-zarr', scale = (1, um_per_pixel_y, um_per_pixel_x), \
-                        translate = (0, y_shift, x_shift), blending = 'additive', contrast_limits = contrast_limits, name = image_file_names, channel_axis= 1, rotate=rotate_angle) #create napari image layer 
+        viewer.open(os.path.join(bellavista_output_folder, 'OMEzarrImages/Images'), plugin='napari-ome-zarr', scale = (1, um_per_pixel_y, um_per_pixel_x), \
+                        translate = (0, y_shift, x_shift), blending = 'additive', colormap=image_colormap, contrast_limits = contrast_limits, \
+                            name = image_file_names, channel_axis= 1, rotate=rotate_angle) #create napari image layer 
     
     if(plot_transcripts):
         gene_dict = pickle.load(open(os.path.join(bellavista_output_folder,'gene_dict.pkl'),'rb'))
@@ -177,6 +174,7 @@ def main():
     bellavista(
         bellavista_output_folder=bellavista_output_folder,
         plot_image=json_file_param.get('plot_image', False),
+        image_colormap=json_file_param.get('image_colormap'),
         plot_transcripts=json_file_param.get('plot_transcripts', False),
         plot_allgenes=json_file_param.get('plot_allgenes', True),
         genes_visible_on_startup=json_file_param.get('genes_visible_on_startup', False),
