@@ -12,10 +12,9 @@ Bella Vista enables visualization of imaging-based spatial transcriptomics data.
 
 ## Installation
 The following instructions require that you have [Anaconda](https://www.anaconda.com/) installed.
-<!-- - The package can be installed from PyPI via [pip](https://pypi.org/project/pip/) (recommended) or from the [GitHub repository](https://github.com/pkosurilab/BellaVista). -->
 - In MacOS, run the following commands from the Terminal.
 - In Windows, run the following commands from the Anaconda Prompt.
-- Bella Vista requires python 3.9 or above.
+- Bella Vista requires Python 3.9 or above and is dependent on GPU for rendering. 
 
 Create and activate a new virtual environment:
 
@@ -24,13 +23,12 @@ conda create -n bellavista_env python
 conda activate bellavista_env
 ```
 
-<!-- ### Installation via pip:
+Installation via pip:
 ```
 pip install bellavista
 ```
---- -->
 
-### Installation from GitHub repository:
+Alternatively, you can install from GitHub:
 
 ```
 conda install git
@@ -39,7 +37,7 @@ pip install -e BellaVista
 ```
 
 ---
-## Quick Start (with sample data)
+## Quickstart (with sample data)
 
 Below is a short tutorial for loading Bella Vista with sample Xenium data.
 
