@@ -178,6 +178,8 @@ def process_segmentations(data_folder: str, bellavista_output_folder: str, segme
                                 allcellbounds_array.extend(result_array)
                                 counter += 1
                         except: pass 
+        if counter==0:
+            raise Exception("No valid HDF5 files given")
 
         with open(os.path.join(bellavista_output_folder, f'{seg_type}_boundary_coords.pkl'), 'wb') as f:
             pickle.dump(allcellbounds_array, f)
