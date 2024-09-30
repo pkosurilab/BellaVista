@@ -14,6 +14,19 @@ from napari.utils.colormaps import AVAILABLE_COLORMAPS
 from matplotlib import colors as mpl_colors
 from tqdm import tqdm
 
+def rotation_matrix(rotate_angle):
+    # convert angle from degrees to radians
+    angle_radians = np.radians(rotate_angle)
+    # compute cosine and sine of the angle
+    cos_theta = np.cos(angle_radians)
+    sin_theta = np.sin(angle_radians)
+    # construct the rotation matrix
+    rotation_mat = np.array([
+        [cos_theta, -sin_theta],
+        [sin_theta, cos_theta]
+    ])
+    return rotation_mat
+
 def bellavista(
         bellavista_output_folder,
         plot_image=False,
@@ -51,6 +64,7 @@ def bellavista(
     viewer = napari.Viewer()
 
     if(plot_image): 
+
         image_file_names = pickle.load(open(os.path.join(bellavista_output_folder,'image_file_names.pkl'),'rb'))
         # load transformations to align images with transcripts & segmentations
         um_per_pixel_dict = pickle.load(open(os.path.join(bellavista_output_folder,'um_to_px_transforms.pkl'),'rb'))
@@ -59,10 +73,14 @@ def bellavista(
         x_shift = um_per_pixel_dict['x_shift']
         y_shift = um_per_pixel_dict['y_shift']
 
+        rotation_mat = rotation_matrix(rotate_angle)
+        rotated_yshift = (rotation_mat[0][0] * y_shift) + (rotation_mat[0][1] * x_shift)
+        rotated_xshift = (rotation_mat[1][0] * y_shift) + (rotation_mat[1][1] * x_shift)
+
         print('Loading image...')
         viewer.open(os.path.join(bellavista_output_folder, 'OMEzarrImages/Images'), plugin='napari-ome-zarr', scale = (1, um_per_pixel_y, um_per_pixel_x), \
-                        translate = (0, y_shift, x_shift), blending = 'additive', colormap=image_colormap, contrast_limits = contrast_limits, \
-                            name = image_file_names, channel_axis= 1, rotate=rotate_angle) #create napari image layer 
+                        translate = (0, rotated_yshift, rotated_xshift), blending = 'additive', colormap=image_colormap, contrast_limits = contrast_limits, \
+                            name = image_file_names, channel_axis = 1, rotate=rotate_angle) #create napari image layer 
     
     if(plot_transcripts):
         gene_dict = pickle.load(open(os.path.join(bellavista_output_folder,'gene_dict.pkl'),'rb'))
