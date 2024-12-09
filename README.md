@@ -1,20 +1,20 @@
-# Bella Vista
+# BellaVista
 
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://github.com/pkosurilab/BellaVista/blob/main/images/bellavista_figure_darkmode.png?raw=true" width="900">
-    <img alt="Bella Vista workflow" src="https://github.com/pkosurilab/BellaVista/blob/main/images/bellavista_figure.png?raw=true" width="900">
+    <img alt="BellaVista workflow" src="https://github.com/pkosurilab/BellaVista/blob/main/images/bellavista_figure.png?raw=true" width="900">
   </picture>
 </p>
 <p align="center">
 
-Bella Vista enables visualization of imaging-based spatial transcriptomics data. It is an open-source Python package currently supporting 10x Genomics Xenium, Vizgen MERSCOPE, and custom (home-built) MERFISH datasets, utilizing [napari](https://napari.org/) for interactive data exploration. We developed Bella Vista to help the spatial transcriptomics community explore their data and create reproducible paper-ready figures. For more information, see our [documentation website](https://bellavista.readthedocs.io/en/latest/).
+BellaVista enables visualization of imaging-based spatial transcriptomics data. It is an open-source Python package currently supporting 10x Genomics Xenium, Vizgen MERSCOPE, and custom (home-built) MERFISH datasets, utilizing [napari](https://napari.org/) for interactive data exploration. We developed BellaVista to help the spatial transcriptomics community explore their data and create reproducible paper-ready figures. For more information, see our [documentation website](https://bellavista.readthedocs.io/en/latest/).
 
 ## Installation
 The following instructions require that you have [Anaconda](https://www.anaconda.com/) installed.
 - In MacOS, run the following commands from the Terminal.
 - In Windows, run the following commands from the Anaconda Prompt.
-- Bella Vista requires Python 3.9 or above and is dependent on GPU for rendering. 
+- BellaVista requires Python 3.9 or above and is dependent on GPU for rendering. 
 
 Create and activate a new virtual environment:
 
@@ -39,17 +39,17 @@ pip install -e BellaVista
 ---
 ## Quickstart (with sample data)
 
-Below is a short tutorial for loading Bella Vista with sample Xenium data.
+Below is a short tutorial for loading BellaVista with sample Xenium data.
 
 1. Download sample data: [Xenium mouse brain dataset (Replicate 3)](https://www.10xgenomics.com/datasets/fresh-frozen-mouse-brain-replicates-1-standard)
 
       - To download the dataset, 10x Genomics may ask you to fill out a questionnaire.
       - Unzip the downloaded zip file. This will create a folder named "Xenium_V1_FF_Mouse_Brain_MultiSection_3_outs".
-      - Take note of your local path to this folder, as you will need this path when running Bella Vista.
+      - Take note of your local path to this folder, as you will need this path when running BellaVista.
 
 <img src="https://github.com/pkosurilab/BellaVista/blob/main/images/xenium_testdata_location.png?raw=true" alt="Xenium sample data website location" width="600" />
 
-2. Run Bella Vista from the command line with the Xenium sample data:
+2. Run BellaVista from the command line with the Xenium sample data:
 
       - Note: Before running this command, replace "/path/to/" with the actual path to the Xenium sample data folder.
 
@@ -95,12 +95,12 @@ Try zooming in & out, toggling layers on & off to see different spatial patterns
 
 
 > [!NOTE]  
-> Gene colors are assigned randomly every time Bella Vista is launched. So, the gene colors displayed in your window will be different from the image above. Refer to our [FAQ](https://bellavista.readthedocs.io/en/latest/faq.html#helpful-napari-tips) on the documentation website for information on how to configure gene colors and other customizable visualization options.
+> Gene colors are assigned randomly every time BellaVista is launched. So, the gene colors displayed in your window will be different from the image above. Refer to our [FAQ](https://bellavista.readthedocs.io/en/latest/faq.html#helpful-napari-tips) on the documentation website for information on how to configure gene colors and other customizable visualization options.
 >
-> To reproduce the same colors every time you launch Bella Vista, refer to the [figure guide](https://bellavista.readthedocs.io/en/latest/figure_guide.html) on the documentation website.
+> To reproduce the same colors every time you launch BellaVista, refer to the [figure guide](https://bellavista.readthedocs.io/en/latest/figure_guide.html) on the documentation website.
 <br/>
 
 For an exact reproduction of the screenshots above, please refer to the figure guide: [Reproducing sample figures (Xenium)](https://bellavista.readthedocs.io/en/latest/figure_guide.html#reproducing-sample-figures-xenium) on the documentation website.
 
 
-### To run Bella Vista with your own data, refer to the tutorials on the [documentation website](https://bellavista.readthedocs.io/en/latest/tutorials.html).
+### To run BellaVista with your own data, refer to the tutorials on the [documentation website](https://bellavista.readthedocs.io/en/latest/tutorials.html).
