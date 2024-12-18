@@ -42,7 +42,7 @@ def bellavista(
         rotate_angle=0
 ):
 
-    print('Loading Bella Vista:')
+    print('Loading BellaVista:')
     txs_colors = plt.cm.gist_rainbow(np.linspace(0, 1, 1025))
 
     # check for any exceptions caused while creating input data
