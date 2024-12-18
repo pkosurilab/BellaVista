@@ -62,7 +62,7 @@ def create_inputs(json_file: Dict):
     system = json_file.get('system')
 
     if (system.lower() == 'xenium'):
-        print('Creating Bella Vista input files for 10x Genomics Xenium')
+        print('Creating BellaVista input files for 10x Genomics Xenium')
         exceptions = create_ome_zarr(data_folder, bellavista_output_folder, json_file_input_files, exceptions)
         exceptions = input_data_xenium.create_micron_pixel(data_folder, bellavista_output_folder, json_file_input_files, exceptions)
         exceptions = input_data_xenium.create_transcripts(data_folder, bellavista_output_folder, json_file_input_files, exceptions)
@@ -73,7 +73,7 @@ def create_inputs(json_file: Dict):
 
 
     elif (system.lower() == 'merscope'):
-        print('Creating Bella Vista input files for Vizgen MERSCOPE')
+        print('Creating BellaVista input files for Vizgen MERSCOPE')
         exceptions = create_ome_zarr(data_folder, bellavista_output_folder, json_file_input_files, exceptions)
         exceptions = input_data_merscope.create_micron_pixel(data_folder, bellavista_output_folder, json_file_input_files, exceptions)
         exceptions = input_data_merscope.create_transcripts(data_folder, bellavista_output_folder, json_file_input_files, exceptions)
@@ -83,7 +83,7 @@ def create_inputs(json_file: Dict):
             json.dump(exceptions, f)
 
     else:
-        print('Creating Bella Vista input files for Custom MERFISH (MERlin)')
+        print('Creating BellaVista input files for Custom MERFISH (MERlin)')
         exceptions = create_ome_zarr(data_folder, bellavista_output_folder, json_file_input_files, exceptions)
         exceptions = input_data_merlin.create_micron_pixel(data_folder, bellavista_output_folder, json_file_input_files, exceptions)
         exceptions = input_data_merlin.create_transcripts(data_folder, bellavista_output_folder, json_file_input_files, exceptions)
@@ -92,7 +92,7 @@ def create_inputs(json_file: Dict):
         with open(os.path.join(bellavista_output_folder, 'exceptions.json'), 'w') as f:
             json.dump(exceptions, f)
 
-    print('Bella Vista input files created!', end='\n\n')
+    print('BellaVista input files created!', end='\n\n')
 
 
 def create_ome_zarr(data_folder: str, bellavista_output_folder: str, json_file_input_files: Dict, exceptions: Dict):
