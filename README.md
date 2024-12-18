@@ -72,7 +72,7 @@ A napari window should appear displaying the data similar to the image below:
 > [!TIP]
 > This is a large dataset, so if the program encounters a memory-related error, try visualizing a smaller subset of the data:
 > ```
-> bellavista --xenium-sample-lite /path/to/Xenium_V1_FF_Mouse_Brain_MultiSection_3_outs
+> bellavista --xenium-sample-lite /path/to/xenium_mouse_brain_rep3
 >```
 > 
 Now, you can interactively move around the napari canvas to explore the data!\
