@@ -37,7 +37,7 @@ Repository = "https://github.com/pkosurilab/BellaVista.git"
 Issues = "https://github.com/pkosurilab/BellaVista/issues"
 
 [tool.setuptools]
-packages = ["bellavista"]
+packages = ["bellavista", "bellavista.utils","bellavista.utils.ngff_writer"]
 include-package-data = true
 
 [tool.setuptools.package-data]
