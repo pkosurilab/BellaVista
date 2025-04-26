@@ -1,3 +1,9 @@
+[![Manuscript](https://img.shields.io/badge/DOI-10.1016/j.bpj.2024.11.3199-orange.svg?logo=doi)](https://doi.org/10.1016/j.bpj.2024.11.3199)
+[![pypi](https://img.shields.io/badge/pypi-bellavista-blue.svg?logo=pypi)](https://pypi.org/project/bellavista)
+[![bioconda](https://img.shields.io/badge/bioconda-bellavista-blue.svg?logo=anaconda)](https://anaconda.org/bioconda/bellavista)
+[![Docker Repository on Quay](https://img.shields.io/badge/container-bellavista-blue?logo=docker)](https://quay.io/repository/bgruening/bellavista)
+[![European Galaxy server](https://img.shields.io/badge/usegalaxy-.eu-brightgreen?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAASCAYAAABB7B6eAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAAsTAAALEwEAmpwYAAACC2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS40LjAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyI+CiAgICAgICAgIDx0aWZmOlJlc29sdXRpb25Vbml0PjI8L3RpZmY6UmVzb2x1dGlvblVuaXQ+CiAgICAgICAgIDx0aWZmOkNvbXByZXNzaW9uPjE8L3RpZmY6Q29tcHJlc3Npb24+CiAgICAgICAgIDx0aWZmOk9yaWVudGF0aW9uPjE8L3RpZmY6T3JpZW50YXRpb24+CiAgICAgICAgIDx0aWZmOlBob3RvbWV0cmljSW50ZXJwcmV0YXRpb24+MjwvdGlmZjpQaG90b21ldHJpY0ludGVycHJldGF0aW9uPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KD0UqkwAAAn9JREFUOBGlVEuLE0EQruqZiftwDz4QYT1IYM8eFkHFw/4HYX+GB3/B4l/YP+CP8OBNTwpCwFMQXAQPKtnsg5nJZpKdni6/6kzHvAYDFtRUT71f3UwAEbkLch9ogQxcBwRKMfAnM1/CBwgrbxkgPAYqlBOy1jfovlaPsEiWPROZmqmZKKzOYCJb/AbdYLso9/9B6GppBRqCrjSYYaquZq20EUKAzVpjo1FzWRDVrNay6C/HDxT92wXrAVCH3ASqq5VqEtv1WZ13Mdwf8LFyyKECNbgHHAObWhScf4Wnj9CbQpPzWYU3UFoX3qkhlG8AY2BTQt5/EA7qaEPQsgGLWied0A8VKrHAsCC1eJ6EFoUd1v6GoPOaRAtDPViUr/wPzkIFV9AaAZGtYB568VyJfijV+ZBzlVZJ3W7XHB2RESGe4opXIGzRTdjcAupOK09RA6kzr1NTrTj7V1ugM4VgPGWEw+e39CxO6JUw5XhhKihmaDacU2GiR0Ohcc4cZ+Kq3AjlEnEeRSazLs6/9b/kh4eTC+hngE3QQD7Yyclxsrf3cpxsPXn+cFdenF9aqlBXMXaDiEyfyfawBz2RqC/O9WF1ysacOpytlUSoqNrtfbS642+4D4CS9V3xb4u8P/ACI4O810efRu6KsC0QnjHJGaq4IOGUjWTo/YDZDB3xSIxcGyNlWcTucb4T3in/3IaueNrZyX0lGOrWndstOr+w21UlVFokILjJLFhPukbVY8OmwNQ3nZgNJNmKDccusSb4UIe+gtkI+9/bSLJDjqn763f5CQ5TLApmICkqwR0QnUPKZFIUnoozWcQuRbC0Km02knj0tPYx63furGs3x/iPnz83zJDVNtdP3QAAAABJRU5ErkJggg==)](https://usegalaxy.eu/root?tool_id=interactive_tool_bellavista)
+
 # BellaVista
 
 <p align="center">
@@ -35,6 +41,23 @@ conda install git
 git clone https://github.com/pkosurilab/BellaVista
 pip install -e BellaVista
 ```
+
+BellaVista can also be installed directly from bioconda:
+
+```
+conda create -n bellavista_env -c bioconda bellavista
+conda activate bellavista_env
+```
+
+A Docker image of the BellaVista Tool is also provided that can be deployed locally, in compute clusters, or in the cloud. The container includes all dependencies required by BellaVista to run in an isolated container.
+
+The container can be pulled via:
+
+```
+docker pull quay.io/bgruening/bellavista:latest
+```
+
+For more information about the container, please refer to the [docker-bellavista repository](https://github.com/usegalaxy-eu/docker-bellavista).
 
 ---
 ## Quickstart (with sample data)
@@ -103,3 +126,12 @@ For an exact reproduction of the screenshots above, please refer to the figure g
 
 
 ### To run BellaVista with your own data, refer to the tutorials on the [documentation website](https://bellavista.readthedocs.io/en/latest/tutorials.html).
+
+## Using BellaVista on Galaxy Platform
+
+Galaxy is a free, open-source system for analyzing data, authoring workflows, training and education, publishing tools, managing infrastructure, and more. 
+You can easily run Bellavista as an Interactive tool on Galaxy.
+
+[Try it out here!](https://usegalaxy.eu/?tool_id=interactive_tool_bellavista&version=latest)
+
+You can check "[Galaxy Basics for everyone](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html)" training to learn more about data analysis using Galaxy!
