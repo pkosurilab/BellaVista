@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "bellavista"
-version = "0.1.0"
+version = "0.1.0a1"
 authors = [
     {name = "Annabelle Coles", email = "acoles@salk.edu"},
 ]
@@ -24,7 +24,7 @@ dependencies = [
     "h5py",
     "imagecodecs",
     "matplotlib",
-    "napari[all]==0.6.1",
+    "napari[all]",
     "napari-ome-zarr",
     "networkx",
     "numpy>=2",
