@@ -2,8 +2,8 @@
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/pkosurilab/BellaVista/blob/main/images/bellavista_figure_darkmode.png?raw=true" width="900">
-    <img alt="BellaVista workflow" src="https://github.com/pkosurilab/BellaVista/blob/main/images/bellavista_figure.png?raw=true" width="900">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/pkosurilab/BellaVista/legacy-version/images/bellavista_figure_darkmode.png" width="900">
+    <img alt="BellaVista workflow" src="https://raw.githubusercontent.com/pkosurilab/BellaVista/legacy-version/images/bellavista_figure.png?raw=true" width="900">
   </picture>
 </p>
 <p align="center">
@@ -46,7 +46,7 @@ Below is a short tutorial for loading BellaVista with sample Xenium data.
       - Unzip the downloaded zip file. This will create a folder named "xenium_mouse_brain_rep3".
       - Take note of your local path to this folder, as you will need this path when running BellaVista.
 
-<img src="https://github.com/pkosurilab/BellaVista/blob/updates/zenodo-tutorial/images/zenodo_download.png?raw=true" alt="Xenium sample data zenodo" width="600" />
+<img src="https://raw.githubusercontent.com/pkosurilab/BellaVista/legacy-version/images/zenodo_download.png" alt="Xenium sample data zenodo" width="600" />
 
 2. Run BellaVista from the command line with the Xenium sample data:
 
@@ -65,7 +65,7 @@ Once successfully loaded, you should see the message `Data Loaded!` in the termi
 
 A napari window should appear displaying the data similar to the image below:
 
-<img src="https://github.com/pkosurilab/BellaVista/blob/updates/misc-changes/images/xenium_initial.png?raw=true" alt="Initial napari load page"/>
+<img src="https://raw.githubusercontent.com/pkosurilab/BellaVista/legacy-version/images/xenium_initial.png" alt="Initial napari load page"/>
 
 <br/>
 
@@ -80,9 +80,9 @@ Try zooming in & out, toggling layers on & off to see different spatial patterns
 
 
 <p align="left">
-  <img src="https://github.com/pkosurilab/BellaVista/blob/main/images/xenium_brain_position_0_select.png?raw=true" alt="zoom out screenshot" />
-  <img src="https://github.com/pkosurilab/BellaVista/blob/main/images/xenium_brain_position_1.png?raw=true" alt="zoom in screenshot" />
-  <img src="https://github.com/pkosurilab/BellaVista/blob/updates/misc-changes/images/xenium_brain_position_2_cellbounds.png?raw=true" alt="zoom in cellbounds screenshot" />
+  <img src="https://raw.githubusercontent.com/pkosurilab/BellaVista/legacy-version//images/xenium_brain_position_0_select.png" alt="zoom out screenshot" />
+  <img src="https://raw.githubusercontent.com/pkosurilab/BellaVista/legacy-version/images/xenium_brain_position_1.png" alt="zoom in screenshot" />
+  <img src="https://raw.githubusercontent.com/pkosurilab/BellaVista/legacy-version/images/xenium_brain_position_2_cellbounds.png" alt="zoom in cellbounds screenshot" />
 </p>
 
 <br/>
