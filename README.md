@@ -16,7 +16,8 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 # Windows
 powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
-Restart the shell (close and reopen the terminal) to complete the installation. 
+> [!IMPORTANT]
+> Restart the shell (close and reopen the terminal) to complete the installation. 
 
 ### 2. Launch BellaVista 
 ```
