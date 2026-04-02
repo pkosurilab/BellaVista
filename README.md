@@ -1,4 +1,4 @@
-# BellaVista
+# BellaVista (Legacy Version)
 
 <p align="center">
   <picture>
