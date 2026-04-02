@@ -1,12 +1,12 @@
 # BellaVista
 
-BellaVista is a visualization tool utilizing the [napari](https://napari.org/) viewer for interactive exploration of imaging-based transcriptomic data. This BellaVista release is designed for data already processed through the KoLab-MERFISH pipeline. BellaVista can be used to visualize the 4 key dataset components of each KoLab-MERFISH dataset: (1) WGA & DAPI images, (2) Cell segmentation boundaries, (3) Transcript locations, (4) Cell network connectivity graphs. Note: BellaVista is purely a visualization tool - it does not perform data processing or analysis :)
+BellaVista is a visualization tool utilizing the [napari](https://napari.org/) viewer for interactive exploration of imaging-based spatial transcriptomic data. This BellaVista release is designed for data already processed through the KoLab-MERFISH pipeline. BellaVista can be used to visualize the 4 key dataset components of each KoLab-MERFISH dataset: (1) Cell boundary & nuclear images (WGA & DAPI), (2) Cell segmentation boundaries, (3) Transcript locations, (4) Cell network connectivity graphs. Note: BellaVista is purely a visualization tool - it does not perform data processing or analysis :)
 
-## Quick Start
+## Quick Start (with sample data)
 
 This short demo will load a sample FOV from the TAC mouse heart. BellaVista is installed and run via the command line. Run the steps below in the `Terminal` (macOS/Linux) or `PowerShell` (Windows) application. 
 
-> **Note:** BellaVista requires a GPU for rendering. 
+> **Note:** BellaVista requires a monitor display to render images in the napari viewer.
 
 ### 1. Install [uv](https://docs.astral.sh/uv/getting-started/installation/)
 ```
@@ -106,7 +106,7 @@ The boundaries for each cell type will be colored as follows: CM: pink, EC: gree
   <img src="https://raw.githubusercontent.com/pkosurilab/BellaVista-KoLab-MERFISH/main/images/network_widget.png"
   alt="BellaVista network widget" width="200" />
 
-  The network widget can be used to plot the cell connectivity networks. The centroid of each cell is plotted as a node (napari point layer), and is colored by its corresponding cell type: CM: pink, EC: green, IC: blue, FB: yellow. Cardiomyocyte->cell-type-specific edges are plotted, and are colored by the cell-type identity of the corresponding cardiomyocyte's neighbor. Note: this network is cardiomyocyte centric, meaning if two cells are connected, but neither is a cardiomyocyte, then the connection will not be shown. The node size can be adjusted with this widget.  
+  The network widget can be used to plot the cell connectivity networks. The centroid of each cell is plotted as a node (napari point layer), and is colored by its corresponding cell type: CM: pink, EC: green, IC: blue, FB: yellow. Cardiomyocyte->cell-type-specific edges are plotted, and are colored by the cell-type identity of the corresponding cardiomyocyte's neighbor. Note: this network is cardiomyocyte centric, meaning if two cells are connected, but neither is a cardiomyocyte, then the connection will not be shown.
   </p>
 
 <p align="left">
@@ -125,13 +125,17 @@ The boundaries for each cell type will be colored as follows: CM: pink, EC: gree
 
 # Visualizing full MERFISH datasets
 
-We will share the commands to visualize the Sham and TAC datasets, including the private url-links. To visualize a dataset hosted on the web, use the following single-line command:
+We will share the commands to visualize the Sham and TAC datasets from the mouse heart, including the private url-links. To visualize a dataset hosted on the web, use the following single-line command:
 
 ```
 uvx -p 3.12 bellavista --dataset-url "url-link-to-dataset"
 ```
 
 > [!NOTE]
+> We recommend having at least 10GB of disk space available to download and visualize the full Sham and TAC datasets. The files will be downloaded and extracted in the folder you're currently in (working directory of your terminal). 
+>
+> Each dataset contains WGA & DAPI images, tens-of-thousands of cells, and hundreds-of-millions of transcripts. For visualization, these data will be converted to visualization files that will also require approximately the same amount of space as the raw datasets. So please keep this in mind when downloading the data!
+>
 > It will take a few minutes to download and create the required data files. The terminal will print updates & display progress bars for time consuming steps.
 
 
@@ -147,10 +151,5 @@ Try zooming in & out, plotting cell-type-specific transcripts, cell boundaries, 
 <p align="middle">
 <img src="https://raw.githubusercontent.com/pkosurilab/BellaVista-KoLab-MERFISH/main/images/BellaVista_demo.png" alt="BellaVista TAC dataset" width="800" />
 </p>
-
-> [!IMPORTANT]  
-> Each dataset contains a volume of data ~2GB for the Sham, and ~2.5GB for the TAC dataset. Each dataset contains WGA & DAPI images, tens-of-thousands of cells, and hundreds-of-millions of transcripts. For visualization, these data will be converted to visualization files that will also require approximately the same amount of space as the raw datasets. So please keep this in mind when downloading the data!
->
-> Each folder contains 4 key data components: (1) WGA & DAPI images, (2) Cell boundaries, (3) Transcripts, (4) Cell network connectivity graphs, along with auxiliary files. 
 
 > **That's it for the example Sham and TAC datasets!** 
