@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "bellavista-kolab-merfish"
+name = "bellavista"
 version = "0.1.0"
 authors = [
     {name = "Annabelle Coles", email = "acoles@salk.edu"},
@@ -38,7 +38,6 @@ dependencies = [
 ]
 
 [project.urls]
-Documentation = "https://bellavista.readthedocs.io"
 Repository = "https://github.com/pkosurilab/BellaVista.git"
 Issues = "https://github.com/pkosurilab/BellaVista/issues"
 
