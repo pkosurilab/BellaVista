@@ -132,7 +132,7 @@ uvx -p 3.12 bellavista --dataset-url "url-link-to-dataset"
 ```
 
 > [!NOTE]
-> We recommend having at least 10GB of disk space available to download and visualize the full Sham and TAC datasets. The files will be downloaded and extracted in the folder you're currently in (working directory of your terminal). 
+> We recommend having at least 16GB of RAM and 10GB of disk space available to download and visualize the full Sham and TAC datasets. The files will be downloaded and extracted in the folder you're currently in (working directory of your terminal). 
 >
 > Each dataset contains WGA & DAPI images, tens-of-thousands of cells, and hundreds-of-millions of transcripts. For visualization, these data will be converted to visualization files that will also require approximately the same amount of space as the raw datasets. So please keep this in mind when downloading the data!
 >
