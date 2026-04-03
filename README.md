@@ -14,7 +14,7 @@ This short demo will load a sample FOV from the TAC mouse heart. BellaVista is i
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Windows
-powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 > [!IMPORTANT]
 > Restart the shell (close and reopen the terminal) to complete the installation. 
@@ -138,6 +138,35 @@ uvx -p 3.12 bellavista --dataset-url "url-link-to-dataset"
 >
 > It will take a few minutes to download and create the required data files. The terminal will print updates & display progress bars for time consuming steps.
 
+<details>
+<summary><strong>Example terminal outputs</strong></summary>
+  
+```
+Creating BellaVista input files for KoLab-MERFISH:
+Processing WGA image... WGA OME-Zarr image saved successfully!
+Processing DAPI image... DAPI OME-Zarr image saved successfully!
+Processing Transcripts/all_transcripts.csv.gz: 100%|██████████████| 140/140
+Processing Transcripts/CM_1-2-3_transcripts.csv.gz: 100%|█████████| 140/140
+Processing Transcripts/CM_transcripts.csv.gz: 100%|███████████████| 140/140
+Processing Transcripts/EC_transcripts.csv.gz: 100%|███████████████| 140/140
+Processing Transcripts/FB_transcripts.csv.gz: 100%|███████████████| 140/140
+Processing Transcripts/IC_transcripts.csv.gz: 100%|███████████████| 140/140
+Processing CellBoundaries/all_boundaries.csv.gz: 100%|█████████████| 84335/84335
+Processing CellBoundaries/CM_1-2-3_boundaries.csv.gz: 100%|████████| 33512/33512
+Processing CellBoundaries/CM_boundaries.csv.gz: 100%|██████████████| 42333/42333
+Processing CellBoundaries/EC_boundaries.csv.gz: 100%|██████████████| 22540/22540
+Processing CellBoundaries/FB_boundaries.csv.gz: 100%|██████████████| 13052/13052
+Processing CellBoundaries/IC_boundaries.csv.gz: 100%|██████████████| 6410/6410
+Processing cell network graph nodes: 100%|█████████████████████████| 76984/76984
+Processing CM network graph edges: 100%|███████████████████████████| 39532/39532
+Processing EC network graph edges: 100%|███████████████████████████| 45939/45939
+Processing IC network graph edges: 100%|███████████████████████████| 11888/11888
+Processing FB network graph edges: 100%|███████████████████████████| 21467/21467
+BellaVista input files created!
+
+Data Loaded!
+```
+</details>
 
 After successfully launching BellaVista, you should see the message `Data Loaded!` in the terminal. A napari window should appear displaying the data similar to the image below (TAC dataset shown here):
 
